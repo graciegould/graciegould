@@ -1,7 +1,7 @@
 import './css/main.css'
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './pages/app/App.js';
+import App from './App.js';
 import page from 'page';
 const loadPage = async (pageName) => {
     return await import(`./${pageName}`).default;

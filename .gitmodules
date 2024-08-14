@@ -1,0 +1,3 @@
+[submodule "src/project/handpan"]
+	path = src/project/handpan
+	url = https://github.com/graciegould/handpan.git
