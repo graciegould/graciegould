@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom/client';
 function App() {
     return (
         <div className='app-container'>
@@ -6,5 +7,6 @@ function App() {
         </div>
     );
 }
-
-export default App;
+const rootElement = document.getElementById('root');
+const root = ReactDOM.createRoot(rootElement);
+root.render(<App />);
