@@ -4,7 +4,7 @@
   "description": "<!-- **graciegould/graciegould** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js --watch server.js --watch webpack.config.js && gulp",
+    "start": "nodemon server.js  --watch server.js --watch webpack.config.js && gulp",
     "build": "webpack --config webpack.config.js",
     "dev": "webpack serve --config webpack.config.js --open",
     "gulp": "gulp"
@@ -13,12 +13,13 @@
     "@babel/preset-react": "^7.24.7",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "fs": "^0.0.1-security",
     "html-loader": "^5.0.0",
     "html-webpack-plugin": "^5.6.0",
     "install": "^0.13.0",
     "mini-css-extract-plugin": "^2.9.0",
     "page": "^1.11.6",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "uuid": "^10.0.0"
   },
   "devDependencies": {

@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: [
-        'webpack-hot-middleware/client?reload=true', // Ensures full page reload on HMR fail
+        'webpack-hot-middleware/client?reload=true',
         './src/index.js'
     ],
     output: {

@@ -1,11 +1,11 @@
 import './css/main.css'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './pages/app/App.js';
 import page from 'page';
-
 const loadPage = async (pageName) => {
     return await import(`./${pageName}`).default;
 };
-
-console.log("Hello from index.js");
 // const pages = {
 //     main: {
 //         entry: 'pages/main/main',
@@ -20,6 +20,9 @@ console.log("Hello from index.js");
 // });
 
 // page();
-if (module.hot) {
-    module.hot.accept();
-}
+// if (module.hot) {
+//     module.hot.accept();
+// }
+const rootElement = document.getElementById('root');
+const root = ReactDOM.createRoot(rootElement);
+root.render(<App />);
