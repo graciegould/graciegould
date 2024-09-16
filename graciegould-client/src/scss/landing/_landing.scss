@@ -1,0 +1,14 @@
+.retro-box {
+  font-size: 15px;
+  border: 2px outset;
+  outline: none;
+}
+  
+button {
+  cursor: pointer;
+  &:active {
+    border: 2px inset;
+  }
+}
+
+@import './landing/_viewport.scss';

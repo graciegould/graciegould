@@ -1,0 +1,47 @@
+.viewport {
+    border: 1px solid black;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.viewport-top-bar {
+    display: flex;
+    width: 100%;
+    height: 25px;
+    background-color: #f1f1f1;
+    border-bottom: 1px solid black;
+    overflow: hidden;
+}
+
+.viewport-exit-btn__container {
+    width: 25px;
+    height: 25px;
+    background-color: #f1f1f1;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+.viewport-minimize-btn__container {
+    width: 25px;
+    height: 25px;
+    background-color: #f1f1f1;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+.viewport-maximize-btn__container {
+    width: 25px;
+    height: 25px;
+    background-color: #f1f1f1;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+.viewport-drag-handler {
+    cursor: grab;
+    width: 100%;
+    height: 25px;
+    border: 1px solid black;
+}
+
