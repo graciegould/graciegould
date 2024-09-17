@@ -48,6 +48,8 @@ const Draggable = ({
     const closeDragElement = () => {
       document.onmouseup = null;
       document.onmousemove = null;
+      document.body.style.cursor = 'grab'; // Add this line
+
     };
 
     dragHandler.onmousedown = dragMouseDown;
