@@ -1,81 +1,68 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState, forwardRef } from "react";
+import DragHandler from "../../elements/drag-handler";
+const Draggable = forwardRef(
+  (
+    {
+      children,
+      dragHandlerRef,
+      initialLeft = 0,
+      initialTop = 0,
+      initialWidth = 500,
+      initialHeight = 500,
+      onUpdatePosition = null,
+      id = "draggable-div",
+    },
+    containerRef
+  ) => {
 
-const Draggable = ({ 
-    children, 
-    dragHandlerRef, 
-    initialLeft = 0, 
-    initialTop = 0,
-    updatedPosition = { top: initialTop, left: initialLeft },
-    onUpdatePosition = null
-}) => {
-  const containerRef = useRef(null);
-  const [position, setPosition] = useState({ top: initialTop, left: initialLeft });
+    const [position, setPosition] = useState({
+      top: initialTop,
+      left: initialLeft,
+      width: initialWidth,
+      height: initialHeight,
+    });
 
-  useEffect(() => {
-    const element = containerRef.current;
-    const dragHandler = dragHandlerRef.current;
-    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-
-    const dragMouseDown = (e) => {
-      e = e || window.event;
-      e.preventDefault();
-      pos3 = e.clientX;
-      pos4 = e.clientY;
-      document.onmouseup = closeDragElement;
-      document.onmousemove = elementDrag;
-    };
-
-    const elementDrag = (e) => {
-      e = e || window.event;
-      e.preventDefault();
-      pos1 = pos3 - e.clientX;
-      pos2 = pos4 - e.clientY;
-      pos3 = e.clientX;
-      pos4 = e.clientY;
-
-      setPosition((prevPos) => ({
-        top: prevPos.top - pos2,
-        left: prevPos.left - pos1,
-      }));
+    function update(position) {
+      setPosition(position);
       if(onUpdatePosition) {
-        onUpdatePosition({
-          top: position.top - pos2,
-          left: position.left - pos1
-        });
+        onUpdatePosition(position);
       }
-    };
+    }
 
-    const closeDragElement = () => {
-      document.onmouseup = null;
-      document.onmousemove = null;
-      document.body.style.cursor = 'grab'; // Add this line
+    useEffect(() => {
+      if(dragHandlerRef) {
+        const dragHandler = new DragHandler(containerRef.current, dragHandlerRef.current, {...position}, update);
+        console.log(dragHandler)
+      }
+    }, [dragHandlerRef]);
 
-    };
+    useEffect(() => {
+      if (onUpdatePosition) {
+        onUpdatePosition(position);
+      }
+      return () => {
+        onUpdatePosition = null;
+      }
+    }, [position]);
 
-    dragHandler.onmousedown = dragMouseDown;
-
-    return () => {
-      dragHandler.onmousedown = null;
-      document.onmouseup = null;
-      document.onmousemove = null;
-    };
-  }, [dragHandlerRef]);
-
-  useEffect(() => {
-    setPosition(updatedPosition);
-  }, [updatedPosition]);
-  return (
-    <div
-      ref={containerRef}
-      style={{
-        position: 'absolute',
-        top: position.top + 'px',
-        left: position.left + 'px',
-      }}
-    >
-      {children}
-    </div>
-  );
-};
+    return (
+      <div
+        ref={containerRef}
+        id={id}
+        style={{
+          position: "absolute",
+          boxSizing: "border-box",
+          top: position.top + "px",
+          left: position.left + "px",
+          border: "3px solid green",
+          width: position.width + "px",
+          height:  position.height + "px",
+        }}
+      >
+        {children} 
+      </div>
+    );
+  }
+);
 
 export default Draggable;
