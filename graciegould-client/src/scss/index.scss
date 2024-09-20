@@ -1,10 +1,27 @@
+@font-face {
+    font-family: 'KawaiiP360';
+    src: url("/src/fonts/nds-true-bios.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'KawaiiP360', sans-serif;
+}
+
 .app {
-    background-color: pink;
+    background-color: #f1f1f1;
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
 }
+
+
 
 @import './landing/_landing.scss';

@@ -8,8 +8,10 @@ const Resizable = forwardRef(
       initialHeight = 500,
       initialLeft = 0,
       initialTop = 0,
+      unit = "px",
       onUpdateSize = null,
       dragHandlerRef = null,
+      className = null,
     },
     containerRef
   ) => {
@@ -93,31 +95,35 @@ const Resizable = forwardRef(
         }
       }
       makeResizableDiv(containerRef.current);
-    }, [left, top, containerRef]);
+      if (dragHandlerRef) {
+        new DragHandler(
+          containerRef.current,
+          dragHandlerRef.current,
+          { top, left, width, height },
+          (position) => {
+            setTop(position.top);
+            setLeft(position.left);
+          }
+        );
+      }
+    }, [left, top, containerRef, dragHandlerRef]);
 
-    function update(position) {
-      setTop(position.top);
-      setLeft(position.left);
-      setHeight(position.height);
-      setWidth(position.width);
-    }
     useEffect(() => {
       if (onUpdateSize) {
         onUpdateSize({ width, height, top, left });
       }
-    }, [width, height, top, left]);
+    }, [width, height, top, left, dragHandlerRef]);
 
-    useEffect(() => {
-      if (dragHandlerRef) {
-        const dragHandler = new DragHandler(
-          containerRef.current,
-          dragHandlerRef.current,
-          { top, left, width, height },
-          update
-        );
-        console.log(dragHandler);
-      }
-    }, [dragHandlerRef]);
+    // useEffect(() => {
+    //   if (dragHandlerRef) {
+    //     const dragHandler = new DragHandler(
+    //       containerRef.current,
+    //       dragHandlerRef.current,
+    //       { top, left, width, height },
+    //       update
+    //     );
+    //   }
+    // }, [dragHandlerRef]);
 
     const resizableStyle = {
       background: "white",
@@ -125,7 +131,7 @@ const Resizable = forwardRef(
       height: height + "px",
       left: left + "px",
       top: top + "px",
-      position: "relative",
+      position: "absolute",
       boxSizing: "border-box",
     };
 
@@ -153,22 +159,11 @@ const Resizable = forwardRef(
       bottomLeft: { left: "-5px", bottom: "-5px", cursor: "nesw-resize" },
       bottomRight: { right: "-5px", bottom: "-5px", cursor: "nwse-resize" },
     };
-    const contentContainerStyle = {
-      width: "100%",
-      height: "100%",
-      position: "absolute",
-      border: "3px solid blue",
-    };
 
     return (
-      <div ref={containerRef} className="resizable" style={resizableStyle}>
+      <div ref={containerRef} className={className ? className : "resizable"} style={resizableStyle}>
         <div className="resizers" style={resizersStyle}>
-          <div
-            className="resizeable-content-container"
-            style={contentContainerStyle}
-          >
             {children}
-          </div>
           <div
             className="resizer top-left"
             style={{ ...resizerStyle, ...resizerPositions.topLeft }}

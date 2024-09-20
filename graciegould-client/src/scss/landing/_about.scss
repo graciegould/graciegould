@@ -1,0 +1,103 @@
+$gold_brown: rgb(184, 157, 0);
+$stop_sign_red: rgb(255, 0, 0);
+
+
+.about-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.8fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "about-profile-pic about-profile-pic about-info-top-right"
+        "about-profile-pic about-profile-pic about-info-top-right"
+        "about-info-bottom-left about-info-bottom-left about-info-bottom-right";
+}
+
+.about-profile-pic {
+    width: 100%;
+    height: 100%;
+    grid-area: about-profile-pic;
+
+    .about-profile-pic-container {
+        width: 100%;
+        height: 100%;
+        background-color: $sky_blue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+
+        .about-profile-pic-image {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            object-fit: contain;
+        }
+    }
+}
+
+.about-info-top-right {
+    grid-area: about-info-top-right;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+
+    .about-title {
+        width: 100%;
+        height: 100%;
+        grid-area: about-title;
+        display: flex;
+        flex-direction: row;
+        padding: 10px;
+    
+        .about-title-container {
+            width: 100%;
+            height: 100%;
+            .about-title-name {}
+            .about.title-age {}
+        }
+    }
+}
+
+.about-info-bottom-right {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        ".";
+    grid-area: about-info-bottom-right;
+    .about-contact-info-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        .about-contact-info a{
+            color: $sky_blue;
+        }
+    }
+}
+
+.about-info-bottom-left {
+    display: grid;
+    grid-area: about-info-bottom-left;
+    border: 2px solid purple;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    .about-description {
+        
+        // overflow: scroll;
+    }
+
+}

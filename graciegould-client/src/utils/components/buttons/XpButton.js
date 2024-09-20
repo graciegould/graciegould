@@ -1,15 +1,15 @@
-function RbButton({
+function XpButton({
     children,
     onClick
 }) {
     
     return (
         <button
-            className="btn retro-box"
+            className="xp-btn"
             onClick={onClick}
         >
             {children}
         </button>
     )
 }
-export default RbButton;
+export default XpButton;

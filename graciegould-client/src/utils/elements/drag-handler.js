@@ -1,9 +1,6 @@
 function DragHandler(element, dragHandler, initialPosition, update = () => {}) {
-  console.log("DragHandler", element, dragHandler, initialPosition, update);
   const initialMousePosition = { x: 0, y: 0 };
   const initialElementPosition = initialPosition;
-  console.log("initialElementPosition", initialElementPosition);
-
   const dragMouseDown = (e) => {
     e = e || window.event;
     e.preventDefault();
@@ -22,7 +19,7 @@ function DragHandler(element, dragHandler, initialPosition, update = () => {}) {
     const deltaY = e.clientY - initialMousePosition.y;
     const position = {
       top: initialElementPosition.top + deltaY,
-      left: initialElementPosition.left + deltaX,
+      left: initialElementPosition.left + deltaX
     };
     update(position);
   };

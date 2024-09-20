@@ -1,0 +1,83 @@
+$xp_light_gray: #f1f1f1;
+$xp_blue: #003399;
+$xp_gray: #e4e3e3;
+$xp_dark_gray: #b3b3b3;
+$xp_border: #d6d6d6;
+
+@mixin xp {
+    border: 2px outset $xp_border;
+    outline: none;
+    background-color: $xp_gray;
+    box-sizing: border-box;
+
+}
+
+.xp-box {
+    @include xp;
+}
+
+.xp-box-light {
+    @include xp;
+    background-color: $xp_light_gray;
+    font-size: 15px;
+}
+
+.xp-btn {
+    @include xp;
+    padding: 3px 8px;
+    cursor: pointer;
+    font-size: 15px;
+
+    &:active {
+        border: 2px inset $xp_border;
+    }
+}
+
+.xp-vertical-scrollbar-container {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 3px solid greenyellow;
+    overflow: hidden;
+
+    .xp-scrollbar {
+        @include xp;
+        height: 100%;
+        width: 25px;
+        border: 2px solid brown;
+
+        .xp-scrollbar-thumb {
+            @include xp;
+            position: absolute;
+            top: 0px;
+            width: 100%;
+            height: 25px;
+            border: 2px solid pink;
+            cursor: grab;
+            background-color: pink;
+        }
+    }
+
+    .xp-scrollbar-body-overlay {
+        width: 100%;
+        height: 100%;
+        background-color: $xp_light_gray;
+        box-sizing: border-box;
+        border: 2px solid pink;
+        overflow: scroll;
+    }
+    .xp-scrollbar-body-overlay::-webkit-scrollbar {
+        display: none;
+      }
+      .xp-scrollbar-body-overlay {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+      }
+
+    .xp-scrollbar-body {
+
+    }
+}

@@ -1,0 +1,71 @@
+.webcam-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 5% 80% 25%;
+    grid-auto-columns: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "webcam-top-bar-container"
+        "webcam-video-container"
+        "webcam-bottom-bar-container";
+}
+
+.webcam-video-container {
+
+    grid-area: webcam-video-container;
+}
+.webcam-video-container {
+  flex-grow: 1;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+
+.webcam-video {
+  width: 100%;
+  height: 100%;
+}
+
+.webcam-top-bar-container {
+    background-color: $xp_blue;
+    grid-area: webcam-top-bar-container;
+}
+
+.webcam-bottom-bar-container {
+
+    grid-area: webcam-bottom-bar-container;
+}
+
+
+
+
+// .webcam-container {
+//   display: flex;
+//   flex-direction: column;
+//   border: 2px solid $xp_dark_gray;
+// }
+
+// .webcam-header {
+//   background-color: $xp_blue;
+//   color: white;
+//   padding: 5px;
+//   font-size: 14px;
+// }
+
+
+
+// .webcam-footer {
+//   display: flex;
+//   justify-content: space-between;
+//   padding: 5px;
+// }
+
+// .resize-slider {
+//   width: 100px;
+// }

@@ -30,10 +30,7 @@ const Draggable = forwardRef(
     }
 
     useEffect(() => {
-      if(dragHandlerRef) {
-        const dragHandler = new DragHandler(containerRef.current, dragHandlerRef.current, {...position}, update);
-        console.log(dragHandler)
-      }
+      if(dragHandlerRef) new DragHandler(containerRef.current, dragHandlerRef.current, {...position}, update);
     }, [dragHandlerRef]);
 
     useEffect(() => {
@@ -54,7 +51,6 @@ const Draggable = forwardRef(
           boxSizing: "border-box",
           top: position.top + "px",
           left: position.left + "px",
-          border: "3px solid green",
           width: position.width + "px",
           height:  position.height + "px",
         }}

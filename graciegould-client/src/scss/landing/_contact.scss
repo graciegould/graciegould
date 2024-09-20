@@ -1,0 +1,59 @@
+$gold_brown: rgb(184, 157, 0);
+.contact-container {
+  position: absolute;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: 100%;
+  grid-template-rows: 50% 50%;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "contact-header"
+    "contact-info";
+
+  @media (max-width: 768px) {
+    grid-template-rows: auto auto; 
+    height: auto; 
+  }
+}
+
+.contact-info {
+  grid-area: contact-header;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 100%;
+  grid-auto-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "contact-photo-container contact-header-text-container";
+
+  @media (max-width: 768px) {
+    grid-template-columns: 100%; // Make photo and text stack vertically
+    grid-template-rows: auto auto;
+  }
+
+   h2 {
+    color: $gold_brown;
+   }
+}
+
+
+.contact-header-text-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: contact-header-text-container;
+}
+
+.contact-info {
+  grid-area: contact-info;
+  width: 100%;
+  height: 100%;
+  font-size: 17px;
+  a {
+    color: $sky_blue;
+  }
+}

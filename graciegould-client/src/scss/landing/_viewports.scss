@@ -1,43 +1,28 @@
 .viewport {
-    
+    overflow: hidden;
 }
 
 .viewport-top-bar {
     display: flex;
     width: 100%;
     height: 25px;
-    background-color: #f1f1f1;
-    border-bottom: 1px solid black;
     overflow: hidden;
 }
 
-.viewport-exit-btn__container {
-    width: 25px;
-    height: 25px;
-    background-color: #f1f1f1;
-    border: 1px solid black;
-    box-sizing: border-box;
+.viewport-body {
+    width: 100%;
+    height: calc(100% - 25px);
+    overflow: hidden;
+    position: relative;
 }
 
-.viewport-minimize-btn__container {
+.viewport-btn__container {
     width: 25px;
     height: 25px;
-    background-color: #f1f1f1;
-    border: 1px solid black;
-    box-sizing: border-box;
 }
 
-.viewport-maximize-btn__container {
-    width: 25px;
-    height: 25px;
-    background-color: #f1f1f1;
-    border: 1px solid black;
-    box-sizing: border-box;
-}
 .viewport-drag-handler {
     cursor: grab;
     width: 100%;
     height: 25px;
-    border: 1px solid black;
 }
-
