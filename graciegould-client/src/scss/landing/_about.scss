@@ -1,15 +1,13 @@
 $gold_brown: rgb(184, 157, 0);
 $stop_sign_red: rgb(255, 0, 0);
 
-
 .about-container {
     position: absolute;
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr 0.8fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 0px 0px;
+    grid-template-columns: 47.6% 19.4% 58%; 
+    grid-template-rows: 50% 9.8% 40.4%; 
     grid-auto-flow: row;
     grid-template-areas:
         "about-profile-pic about-profile-pic about-info-top-right"
@@ -20,6 +18,7 @@ $stop_sign_red: rgb(255, 0, 0);
 .about-profile-pic {
     width: 100%;
     height: 100%;
+    position: absolute;
     grid-area: about-profile-pic;
 
     .about-profile-pic-container {
@@ -45,6 +44,7 @@ $stop_sign_red: rgb(255, 0, 0);
     width: 100%;
     height: 100%;
     position: absolute;
+    overflow: hidden;
 
     .about-title {
         width: 100%;
@@ -89,15 +89,13 @@ $stop_sign_red: rgb(255, 0, 0);
 }
 
 .about-info-bottom-left {
-    display: grid;
-    grid-area: about-info-bottom-left;
-    border: 2px solid purple;
-    position: absolute;
     width: 100%;
     height: 100%;
+    position: absolute;
+    display: flex;
+    grid-area: about-info-bottom-left;
     .about-description {
-        
-        // overflow: scroll;
+        height: 3000px;
     }
 
 }

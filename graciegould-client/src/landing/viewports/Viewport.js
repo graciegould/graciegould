@@ -86,7 +86,7 @@ function Bounds({viewport}) {
       left: "10px",
       color: "white",
       fontSize: "12px",
-      zIndex: 1000
+      zIndex: 1000,
     }}>
       <div>
         WIDTH: {pixelsToPercentage(viewport.bounds.width, "width")}

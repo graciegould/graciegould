@@ -6,6 +6,7 @@ function getComputedWidth(element) {
         getComputedStyle(element, null)
           .getPropertyValue("width")
           .replace("px", "")
+          .replace("%", "")
       );
 }
 
@@ -14,6 +15,16 @@ function getComputedHeight(element) {
         getComputedStyle(element, null)
           .getPropertyValue("height")
           .replace("px", "")
+          .replace("%", "")
+      );
+}
+
+function getComputedTop(element) {   
+    return parseFloat(
+        getComputedStyle(element, null)
+          .getPropertyValue("top")
+          .replace("px", "")
+          .replace("%", "")
       );
 }
 
@@ -201,5 +212,6 @@ export {
   percentageToPixels,
   boundaryBoxRelativeToParent,
   getComputedWidth,
-  getComputedHeight
+  getComputedHeight,
+  getComputedTop
 };

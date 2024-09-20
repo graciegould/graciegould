@@ -34,12 +34,10 @@ html {
 }
 
 .xp-box-light {
+  box-sizing: border-box;
   border: 2px outset #d6d6d6;
   outline: none;
-  background-color: #e4e3e3;
-  box-sizing: border-box;
-  background-color: #f1f1f1;
-  font-size: 15px;
+  background-color: #e4e4e4;
 }
 
 .xp-btn {
@@ -62,17 +60,13 @@ html {
   position: absolute;
   width: 100%;
   height: 100%;
-  border: 3px solid greenyellow;
   overflow: hidden;
 }
 .xp-vertical-scrollbar-container .xp-scrollbar {
-  border: 2px outset #d6d6d6;
-  outline: none;
-  background-color: #e4e3e3;
-  box-sizing: border-box;
+  background-color: #e4e4e4;
   height: 100%;
   width: 25px;
-  border: 2px solid brown;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 .xp-vertical-scrollbar-container .xp-scrollbar .xp-scrollbar-thumb {
   border: 2px outset #d6d6d6;
@@ -80,19 +74,19 @@ html {
   background-color: #e4e3e3;
   box-sizing: border-box;
   position: absolute;
+  box-sizing: border-box;
   top: 0px;
-  width: 100%;
-  height: 25px;
-  border: 2px solid pink;
+  width: 25px;
   cursor: grab;
-  background-color: pink;
+}
+.xp-vertical-scrollbar-container .xp-scrollbar .xp-scrollbar-thumb:active {
+  border: 2px inset #d6d6d6;
 }
 .xp-vertical-scrollbar-container .xp-scrollbar-body-overlay {
   width: 100%;
   height: 100%;
-  background-color: #f1f1f1;
+  background-color: #e4e4e4;
   box-sizing: border-box;
-  border: 2px solid pink;
   overflow: scroll;
 }
 .xp-vertical-scrollbar-container .xp-scrollbar-body-overlay::-webkit-scrollbar {
@@ -202,7 +196,7 @@ html {
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #f1f1f1;
+  background-color: #e4e4e4;
   border: 3px solid #d6d6d6;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
@@ -305,9 +299,8 @@ html {
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 0.8fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: 0px 0px;
+  grid-template-columns: 47.6% 19.4% 58%;
+  grid-template-rows: 50% 9.8% 40.4%;
   grid-auto-flow: row;
   grid-template-areas: "about-profile-pic about-profile-pic about-info-top-right" "about-profile-pic about-profile-pic about-info-top-right" "about-info-bottom-left about-info-bottom-left about-info-bottom-right";
 }
@@ -315,6 +308,7 @@ html {
 .about-profile-pic {
   width: 100%;
   height: 100%;
+  position: absolute;
   grid-area: about-profile-pic;
 }
 .about-profile-pic .about-profile-pic-container {
@@ -338,6 +332,7 @@ html {
   width: 100%;
   height: 100%;
   position: absolute;
+  overflow: hidden;
 }
 .about-info-top-right .about-title {
   width: 100%;
@@ -376,10 +371,12 @@ html {
 }
 
 .about-info-bottom-left {
-  display: grid;
-  grid-area: about-info-bottom-left;
-  border: 2px solid purple;
-  position: absolute;
   width: 100%;
   height: 100%;
+  position: absolute;
+  display: flex;
+  grid-area: about-info-bottom-left;
+}
+.about-info-bottom-left .about-description {
+  height: 3000px;
 }

@@ -114,16 +114,6 @@ const Resizable = forwardRef(
       }
     }, [width, height, top, left, dragHandlerRef]);
 
-    // useEffect(() => {
-    //   if (dragHandlerRef) {
-    //     const dragHandler = new DragHandler(
-    //       containerRef.current,
-    //       dragHandlerRef.current,
-    //       { top, left, width, height },
-    //       update
-    //     );
-    //   }
-    // }, [dragHandlerRef]);
 
     const resizableStyle = {
       background: "white",
