@@ -11,7 +11,6 @@ const XpScrollbar = forwardRef(
   ) => {
     const [customScrolling, setCustomScrolling] = useState(false);
     const [thumbHeight, setThumbHeight] = useState(0);
-    const bodyRef = useRef(null);
     const containerRef = useRef(null);
     const scrollbarRef = useRef(null);
     const scrollbarThumbRef = useRef(null);
@@ -21,12 +20,7 @@ const XpScrollbar = forwardRef(
 
     useEffect(() => {
       const updateSizes = () => {
-        if (
-          !scrollContainer.current ||
-          !scrollbarRef.current ||
-          !bodyRef.current
-        )
-          return;
+        if (!scrollContainer.current || !scrollbarRef.current) return;
         const containerHeight = scrollContainer.current.clientHeight;
         const contentHeight = scrollContainer.current.scrollHeight;
         const thumbHeightPercentage = Math.max(
@@ -45,7 +39,6 @@ const XpScrollbar = forwardRef(
 
     useEffect(() => {
       const startScrolling = (e) => {
-        console.log("Start scrolling");
         if (!scrollContainer.current || !scrollbarThumbRef.current) return;
         const scrollbarHeight = scrollbarRef.current.clientHeight;
         const deltaY = e.clientY - initialMousePosition.current;
@@ -114,7 +107,7 @@ const XpScrollbar = forwardRef(
           handleDefaultScroll
         );
       };
-    }, [customScrolling, thumbHeight, scrollRatio]);
+    }, [customScrolling, thumbHeight]);
 
     const scrollbarThumbStyle = {
       position: "absolute",
@@ -129,10 +122,7 @@ const XpScrollbar = forwardRef(
       <div className={className} ref={ref}>
         <div className="xp-vertical-scrollbar-container" ref={containerRef}>
           <div className="xp-scrollbar-body-overlay" ref={scrollContainer}>
-            <div className="xp-scrollbar-body" ref={bodyRef}>
-              {thumbHeight}
-              {children}
-            </div>
+            <div className="xp-scrollbar-body">{children}</div>
           </div>
           <div className="xp-scrollbar-slot">
             <div
