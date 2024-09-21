@@ -1,12 +1,11 @@
 import React, { useRef, useEffect, useState } from "react";
-
 const Webcam = () => {
   const videoRef = useRef(null);
 
   useEffect(() => {
     navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
       if (videoRef.current) {
-        videoRef.current.srcObject = stream;
+        // videoRef.current.srcObject = stream;
       }
     });
   }, []);

@@ -23,10 +23,7 @@ const XpScrollbar = forwardRef(
         if (!scrollContainer.current || !scrollbarRef.current) return;
         const containerHeight = scrollContainer.current.clientHeight;
         const contentHeight = scrollContainer.current.scrollHeight;
-        const thumbHeightPercentage = Math.max(
-          (containerHeight / contentHeight) * 100,
-          10
-        ); // Min thumb height 10%
+        const thumbHeightPercentage = (containerHeight / contentHeight) * 100;
         setThumbHeight(thumbHeightPercentage);
       };
       updateSizes();
@@ -38,81 +35,75 @@ const XpScrollbar = forwardRef(
     }, []);
 
     useEffect(() => {
-      const startScrolling = (e) => {
-        if (!scrollContainer.current || !scrollbarThumbRef.current) return;
-        const scrollbarHeight = scrollbarRef.current.clientHeight;
-        const deltaY = e.clientY - initialMousePosition.current;
-        let newThumbPosition = initialThumbPosition.current + deltaY;
-        const maxThumbPosition =
-          scrollbarHeight - (scrollbarHeight * thumbHeight) / 100;
-        newThumbPosition = Math.max(
-          0,
-          Math.min(newThumbPosition, maxThumbPosition)
-        );
-        const scrollPercentage = newThumbPosition / maxThumbPosition;
-        const maxScrollTop =
-          scrollContainer.current.scrollHeight -
-          scrollContainer.current.clientHeight;
-        scrollContainer.current.scrollTop = scrollPercentage * maxScrollTop;
-        scrollbarThumbRef.current.style.top = `${
-          (newThumbPosition / scrollbarHeight) * 100
-        }%`;
-      };
-
-      const stopScrolling = () => {
-        setCustomScrolling(false);
-        document.removeEventListener("mousemove", startScrolling);
-        document.removeEventListener("mouseup", stopScrolling);
-      };
-
-      const handleMouseDownThumb = (e) => {
-        e.preventDefault();
-        initialMousePosition.current = e.clientY;
-        initialThumbPosition.current = scrollbarThumbRef.current.offsetTop;
-        setCustomScrolling(true);
-        document.addEventListener("mousemove", startScrolling);
-        document.addEventListener("mouseup", stopScrolling);
-      };
-
-      const handleDefaultScroll = (e) => {
-        if (customScrolling) return;
-        const scrollbarHeight = scrollbarRef.current.clientHeight;
-        const scrollTop = scrollContainer.current.scrollTop;
-        const maxScrollTop =
-          scrollContainer.current.scrollHeight -
-          scrollContainer.current.clientHeight;
-        const scrollPercentage = scrollTop / maxScrollTop;
-        const maxThumbPosition =
-          scrollbarHeight - (scrollbarHeight * thumbHeight) / 100;
-        const newThumbPosition = scrollPercentage * maxThumbPosition;
-        scrollbarThumbRef.current.style.top = `${
-          (newThumbPosition / scrollbarHeight) * 100
-        }%`;
-      };
-
-      scrollbarThumbRef.current.addEventListener(
-        "mousedown",
-        handleMouseDownThumb
-      );
-      scrollContainer.current.addEventListener("scroll", handleDefaultScroll);
-      return () => {
-        scrollbarThumbRef.current.removeEventListener(
-          "mousedown",
-          handleMouseDownThumb
-        );
-        document.removeEventListener("mousemove", startScrolling);
-        document.removeEventListener("mouseup", stopScrolling);
-        scrollContainer.current.removeEventListener(
-          "onscroll",
-          handleDefaultScroll
-        );
-      };
-    }, [customScrolling, thumbHeight]);
+        function makeScrollBar() {
+            let customScrolling = false;
+            const startScrolling = (e) => {
+                if (!scrollContainer.current || !scrollbarThumbRef.current) return;
+                console.log("start scrolling");
+                const scrollbarHeight = scrollbarRef.current.clientHeight;
+                const deltaY = e.clientY - initialMousePosition.current;
+                let newThumbPosition = initialThumbPosition.current + deltaY;
+                const maxThumbPosition =
+                  scrollbarHeight - (scrollbarHeight * thumbHeight) / 100;
+                newThumbPosition = Math.max(
+                  0,
+                  Math.min(newThumbPosition, maxThumbPosition)
+                );
+                const scrollPercentage = newThumbPosition / maxThumbPosition;
+                const maxScrollTop =
+                  scrollContainer.current.scrollHeight -
+                  scrollContainer.current.clientHeight;
+                scrollContainer.current.scrollTop = scrollPercentage * maxScrollTop;
+                scrollbarThumbRef.current.style.top = `${
+                  (newThumbPosition / scrollbarHeight) * 100
+                }%`;
+              };
+        
+              const stopScrolling = () => {
+                customScrolling = false;
+                document.removeEventListener("mousemove", startScrolling);
+                document.removeEventListener("mouseup", stopScrolling);
+              };
+        
+              const handleMouseDownThumb = (e) => {
+                console.log("custom scrolling", customScrolling);
+                e.preventDefault();
+                initialMousePosition.current = e.clientY;
+                initialThumbPosition.current = scrollbarThumbRef.current.offsetTop;
+                document.addEventListener("mousemove", startScrolling);
+                document.addEventListener("mouseup", stopScrolling);
+                customScrolling = true;
+              };
+        
+              const handleDefaultScroll = (e) => {
+                if (customScrolling) return;
+                const scrollbarHeight = scrollbarRef.current.clientHeight;
+                const scrollTop = scrollContainer.current.scrollTop;
+                const maxScrollTop =
+                  scrollContainer.current.scrollHeight -
+                  scrollContainer.current.clientHeight;
+                const scrollPercentage = scrollTop / maxScrollTop;
+                const maxThumbPosition =
+                  scrollbarHeight - (scrollbarHeight * thumbHeight) / 100;
+                const newThumbPosition = scrollPercentage * maxThumbPosition;
+                scrollbarThumbRef.current.style.top = `${
+                  (newThumbPosition / scrollbarHeight) * 100
+                }%`;
+              };
+        
+              scrollbarThumbRef.current.addEventListener(
+                "mousedown",
+                handleMouseDownThumb
+              );
+              scrollContainer.current.addEventListener("scroll", handleDefaultScroll);
+        }
+        makeScrollBar();
+    }, [customScrolling, thumbHeight, containerRef, scrollbarRef, scrollContainer]);
 
     const scrollbarThumbStyle = {
-      position: "absolute",
-      height: `${thumbHeight}%`,
-      backgroundColor: thumbColor,
+        position: "absolute",
+        height: `${thumbHeight}%`,
+        backgroundColor: thumbColor,
     };
     const scrollbarStyle = {
       backgroundColor: scrollbarColor,

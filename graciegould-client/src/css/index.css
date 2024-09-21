@@ -12,6 +12,10 @@ html {
   font-family: "KawaiiP360", sans-serif;
 }
 
+btn {
+  border-radius: 0px;
+}
+
 .app {
   background-color: #f1f1f1;
   position: fixed;
@@ -27,30 +31,36 @@ html {
 }
 
 .xp-box {
-  border: 2px outset #d6d6d6;
-  outline: none;
-  background-color: #e4e3e3;
-  box-sizing: border-box;
-}
-
-.xp-box-light {
-  box-sizing: border-box;
-  border: 2px outset #d6d6d6;
-  outline: none;
+  border: 2px outset rgba(255, 255, 255, 0.5);
+  border-bottom: 2px outset #d6d6d6;
+  border-right: 2px outset rgba(0, 0, 0, 0.5);
+  border-radius: 0px;
   background-color: #e4e4e4;
+  outline: none;
+  box-sizing: border-box;
 }
 
 .xp-btn {
-  border: 2px outset #d6d6d6;
+  border: 2px outset rgba(255, 255, 255, 0.5);
+  border-bottom: 2px outset #d6d6d6;
+  border-right: 2px outset rgba(0, 0, 0, 0.5);
+  border-radius: 0px;
+  background-color: #e4e4e4;
   outline: none;
-  background-color: #e4e3e3;
-  box-sizing: border-box;
-  padding: 3px 8px;
   cursor: pointer;
-  font-size: 15px;
+  text-transform: uppercase;
+  width: auto;
 }
 .xp-btn:active {
-  border: 2px inset #d6d6d6;
+  border: 2px inset rgba(0, 0, 0, 0.5);
+  border-bottom: 2px outset #d6d6d6;
+  border-right: 2px outset rgba(0, 0, 0, 0.5);
+  background-color: #d9d9d9;
+  box-shadow: 15px 27px 115px -22px #b3b3b3 inset;
+  outline: none;
+}
+.xp-btn:hover {
+  box-shadow: 15px 27px 115px -22px #b3b3b3 inset;
 }
 
 .xp-vertical-scrollbar-container {
@@ -63,16 +73,23 @@ html {
   overflow: hidden;
 }
 .xp-vertical-scrollbar-container .xp-scrollbar {
+  border: 2px inset rgba(0, 0, 0, 0.5);
+  border-bottom: 2px outset #d6d6d6;
+  border-right: 2px outset rgba(0, 0, 0, 0.5);
+  background-color: #d9d9d9;
+  box-shadow: 15px 27px 115px -22px #b3b3b3 inset;
+  outline: none;
   background-color: #e4e4e4;
   height: 100%;
   width: 25px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 .xp-vertical-scrollbar-container .xp-scrollbar .xp-scrollbar-thumb {
-  border: 2px outset #d6d6d6;
+  border: 2px outset rgba(255, 255, 255, 0.5);
+  border-bottom: 2px outset #d6d6d6;
+  border-right: 2px outset rgba(0, 0, 0, 0.5);
+  border-radius: 0px;
+  background-color: #e4e4e4;
   outline: none;
-  background-color: #e4e3e3;
-  box-sizing: border-box;
   position: absolute;
   box-sizing: border-box;
   top: 0px;
@@ -81,6 +98,7 @@ html {
 }
 .xp-vertical-scrollbar-container .xp-scrollbar .xp-scrollbar-thumb:active {
   border: 2px inset #d6d6d6;
+  cursor: grabbing;
 }
 .xp-vertical-scrollbar-container .xp-scrollbar-body-overlay {
   width: 100%;
@@ -134,69 +152,13 @@ html {
   cursor: grab;
 }
 
-.contact-container {
-  position: absolute;
-  display: grid;
-  width: 100%;
-  height: 100%;
-  grid-template-columns: 100%;
-  grid-template-rows: 50% 50%;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas: "contact-header" "contact-info";
-}
-@media (max-width: 768px) {
-  .contact-container {
-    grid-template-rows: auto auto;
-    height: auto;
-  }
-}
-
-.contact-info {
-  grid-area: contact-header;
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: 100%;
-  grid-auto-rows: 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas: "contact-photo-container contact-header-text-container";
-}
-@media (max-width: 768px) {
-  .contact-info {
-    grid-template-columns: 100%;
-    grid-template-rows: auto auto;
-  }
-}
-.contact-info h2 {
-  color: rgb(184, 157, 0);
-}
-
-.contact-header-text-container {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  grid-area: contact-header-text-container;
-}
-
-.contact-info {
-  grid-area: contact-info;
-  width: 100%;
-  height: 100%;
-  font-size: 17px;
-}
-.contact-info a {
-  color: rgb(99, 149, 224);
-}
-
 .photo-album-container {
   position: relative;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #e4e4e4;
+  background-color: #f0f0f0;
   border: 3px solid #d6d6d6;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
@@ -286,7 +248,7 @@ html {
 }
 
 .webcam-top-bar-container {
-  background-color: #003399;
+  background-color: hsl(220, 100%, 30%);
   grid-area: webcam-top-bar-container;
 }
 
@@ -299,10 +261,11 @@ html {
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: 47.6% 19.4% 58%;
-  grid-template-rows: 50% 9.8% 40.4%;
+  grid-template-columns: 50% 25% 25%;
+  grid-template-rows: 50% 10% 40%;
   grid-auto-flow: row;
   grid-template-areas: "about-profile-pic about-profile-pic about-info-top-right" "about-profile-pic about-profile-pic about-info-top-right" "about-info-bottom-left about-info-bottom-left about-info-bottom-right";
+  overflow: hidden;
 }
 
 .about-profile-pic {
@@ -319,6 +282,7 @@ html {
   justify-content: center;
   align-items: center;
   padding: 10px;
+  overflow: hidden;
 }
 .about-profile-pic .about-profile-pic-container .about-profile-pic-image {
   width: 100%;
@@ -337,10 +301,10 @@ html {
 .about-info-top-right .about-title {
   width: 100%;
   height: 100%;
-  grid-area: about-title;
   display: flex;
   flex-direction: row;
   padding: 10px;
+  overflow: hidden;
 }
 .about-info-top-right .about-title .about-title-container {
   width: 100%;
@@ -349,25 +313,19 @@ html {
 .about-info-bottom-right {
   width: 100%;
   height: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas: ".";
-  grid-area: about-info-bottom-right;
-}
-.about-info-bottom-right .about-contact-info-container {
-  width: 100%;
-  height: 100%;
+  position: absolute;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
+  grid-area: about-info-bottom-right;
+  overflow: hidden;
+  font-size: 20px;
+  text-align: justify;
+}
+.about-info-bottom-right .about-contact-info-item {
+  height: 30%;
 }
 .about-info-bottom-right .about-contact-info-container .about-contact-info a {
   color: rgb(99, 149, 224);
+  text-decoration: none;
 }
 
 .about-info-bottom-left {
@@ -376,7 +334,4 @@ html {
   position: absolute;
   display: flex;
   grid-area: about-info-bottom-left;
-}
-.about-info-bottom-left .about-description {
-  height: 3000px;
 }

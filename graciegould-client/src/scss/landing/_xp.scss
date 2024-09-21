@@ -1,40 +1,55 @@
-$xp_light_gray: #e4e4e4;
-$xp_blue: #003399;
-$xp_gray: #e4e3e3;
+
+$xp-gray: #e4e4e4;
+$xp-light-gray: #f0f0f0;
+$xp_blue: hsl(220, 100%, 30%);
+$xp-gray-shadow: #e4e3e3;
+$xp-medium-gray: #d9d9d9;
 $xp_dark_gray: #b3b3b3;
 $xp_border: #d6d6d6;
+$xp-dark-btn-border: rgba(0,0,0,.5);
+$color-lightener: rgba(255,255,255,.5);
+$color-darkener: rgba(0, 0, 0, 0.5);
 
-@mixin xp {
-    border: 2px outset $xp_border;
+
+@mixin xp-outset {
+    border: 2px outset $color-lightener;
+    border-bottom: 2px outset $xp-border;
+	border-right: 2px outset $xp-dark-btn-border;  
+    border-radius: 0px;
+    background-color: $xp-gray; 
     outline: none;
-    background-color: $xp_gray;
-    box-sizing: border-box;
 }
 
-@mixin xp-light {
-    box-sizing: border-box;
-    border: 2px outset $xp_border;
+@mixin xp-inset {
+    border: 2px inset $color-darkener;
+    border-bottom: 2px outset $xp-border;
+	border-right: 2px outset $xp-dark-btn-border;   
+    background-color: $xp-medium-gray;
+    box-shadow: 15px 27px 115px -22px $xp-dark-gray inset;
     outline: none;
-    background-color: $xp_light_gray;
+}
+@mixin xp {
+    @include xp-outset;
+    box-sizing: border-box;
 }
 
 .xp-box {
     @include xp;
 }
 
-.xp-box-light {
-    @include xp-light;
-}
-
 .xp-btn {
-    @include xp;
-    padding: 3px 8px;
+    @include xp-outset;
     cursor: pointer;
-    font-size: 15px;
+	text-transform: uppercase;
+	width: auto;
 
     &:active {
-        border: 2px inset $xp_border;
+        @include xp-inset;
     }
+	&:hover {
+        box-shadow: 15px 27px 115px -22px $xp-dark-gray inset;
+	}
+
 }
 
 .xp-vertical-scrollbar-container {
@@ -47,12 +62,12 @@ $xp_border: #d6d6d6;
     overflow: hidden;
 
     .xp-scrollbar {
-        background-color: $xp_light_gray;
+        @include  xp-inset;
+        background-color: $xp-gray;
         height: 100%;
         width: 25px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         .xp-scrollbar-thumb {
-            @include xp;
+            @include xp-outset;
             position: absolute;
             box-sizing: border-box;
             top: 0px;
@@ -60,6 +75,7 @@ $xp_border: #d6d6d6;
             cursor: grab;
             &:active {
                 border: 2px inset $xp_border;
+                cursor:grabbing;
             }
         }
     }
@@ -67,7 +83,7 @@ $xp_border: #d6d6d6;
     .xp-scrollbar-body-overlay {
         width: 100%;
         height: 100%;
-        background-color: $xp_light_gray;
+        background-color: $xp-gray;
         box-sizing: border-box;
         overflow: scroll;
     }

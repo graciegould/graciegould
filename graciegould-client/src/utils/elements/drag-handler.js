@@ -22,9 +22,11 @@ function DragHandler(element, dragHandler, initialPosition, update = () => {}) {
       left: initialElementPosition.left + deltaX
     };
     update(position);
+    dragHandler.style.cursor = 'grabbing';
   };
 
   const closeDragElement = () => {
+    dragHandler.style.cursor = 'grab';
     document.onmouseup = null;
     document.onmousemove = null;
   };

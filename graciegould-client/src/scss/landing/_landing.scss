@@ -1,23 +1,12 @@
-$gold: rgb(255, 215, 0);
-$sunflower_orange: rgb(255, 171, 0);
-$light_orange: rgb(255, 210, 62);
-$baker_miller_pink: rgb(200, 146, 146); // (255,145,175)
-$peach: #ffc79c;
-$baby_pink: rgb(254, 206, 206);
-$lavender: rgb(230, 230, 255);
-$klein_blue: rgb(2, 52, 178);
-$phthalo_blue: rgb(0, 122, 255);
-$sky_blue: rgb(99, 149, 224);
-
 
 .desktop {
   width: var(--screen-width);
   height: var(--screen-height);
 }
+@import './landing/_colors.scss';
 @import './landing/_xp.scss';
 @import './landing/_viewports.scss';
 @import './landing/_icons.scss';
-@import './landing/_contact.scss';
 @import './landing/_photos.scss';
 @import './landing/webcam.scss';
 @import './landing/_about.scss';
