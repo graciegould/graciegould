@@ -15,30 +15,41 @@ const viewportsSlice = createSlice({
             },            
             Component: 'About'
         },
-        "photo" : {
-            name: "Photos",  
-            iconPath: "/images/landing-icons/photo-icon.png",
+        "Draw" : {
+            name: "Draw",  
             hidden: false,
             bounds: {
-                width: percentageToPixels(10, "width", window.screen.width), 
-                height: percentageToPixels(10, "height", window.screen.height), 
-                top:  percentageToPixels(0, "top", window.screen.height), 
-                left: percentageToPixels(0, "left", window.screen.width), 
-            },
-            Component: 'Photos'
-        },
-        "webcam" : {
-            name: "Webcam",  
-            iconPath: "/images/landing-icons/photo-icon.png",
-            hidden: false,
-            bounds: {
-                width: percentageToPixels(10, "width", window.screen.width), 
-                height: percentageToPixels(10, "height", window.screen.height), 
-                top:  percentageToPixels(0, "top", window.screen.height), 
-                left: percentageToPixels(0, "left", window.screen.width), 
-            },
-            Component: 'Webcam'
+                width: percentageToPixels(30, "width", window.screen.width), 
+                height: percentageToPixels(50, "height", window.screen.height), 
+                top:  percentageToPixels(5, "top", window.screen.height), 
+                left: percentageToPixels(20, "left", window.screen.width), 
+            },            
+            Component: 'Draw'
         }
+        // "photo" : {
+        //     name: "Photos",  
+        //     iconPath: "/images/landing-icons/photo-icon.png",
+        //     hidden: false,
+        //     bounds: {
+        //         width: percentageToPixels(10, "width", window.screen.width), 
+        //         height: percentageToPixels(10, "height", window.screen.height), 
+        //         top:  percentageToPixels(0, "top", window.screen.height), 
+        //         left: percentageToPixels(0, "left", window.screen.width), 
+        //     },
+        //     Component: 'Photos'
+        // },
+        // "webcam" : {
+        //     name: "Webcam",  
+        //     iconPath: "/images/landing-icons/photo-icon.png",
+        //     hidden: false,
+        //     bounds: {
+        //         width: percentageToPixels(10, "width", window.screen.width), 
+        //         height: percentageToPixels(10, "height", window.screen.height), 
+        //         top:  percentageToPixels(0, "top", window.screen.height), 
+        //         left: percentageToPixels(0, "left", window.screen.width), 
+        //     },
+        //     Component: 'Webcam'
+        // }
     },
     reducers: {
         update: (state, action) => {

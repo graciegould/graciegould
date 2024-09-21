@@ -1,4 +1,3 @@
-
 $xp-gray: #e4e4e4;
 $xp-light-gray: #f0f0f0;
 $xp_blue: hsl(220, 100%, 30%);
@@ -6,32 +5,60 @@ $xp-gray-shadow: #e4e3e3;
 $xp-medium-gray: #d9d9d9;
 $xp_dark_gray: #b3b3b3;
 $xp_border: #d6d6d6;
-$xp-dark-btn-border: rgba(0,0,0,.5);
-$color-lightener: rgba(255,255,255,.5);
+$xp-dark-btn-border: rgba(0, 0, 0, .5);
+$color-lightener: rgba(255, 255, 255, .5);
 $color-darkener: rgba(0, 0, 0, 0.5);
 
 
 @mixin xp-outset {
     border: 2px outset $color-lightener;
     border-bottom: 2px outset $xp-border;
-	border-right: 2px outset $xp-dark-btn-border;  
+    border-right: 2px outset $xp-dark-btn-border;
     border-radius: 0px;
-    background-color: $xp-gray; 
+    background-color: $xp-gray;
     outline: none;
 }
 
 @mixin xp-inset {
     border: 2px inset $color-darkener;
     border-bottom: 2px outset $xp-border;
-	border-right: 2px outset $xp-dark-btn-border;   
+    border-right: 2px outset $xp-dark-btn-border;
     background-color: $xp-medium-gray;
     box-shadow: 15px 27px 115px -22px $xp-dark-gray inset;
     outline: none;
 }
+
 @mixin xp {
     @include xp-outset;
     box-sizing: border-box;
 }
+
+@mixin xp-vertical-scrollbar {
+    @include xp-inset;
+    background-color: $xp-gray;
+    height: 100%;
+    width: 25px;
+}
+
+@mixin xp-horizontal-scrollbar {
+    @include xp-inset;
+    background-color: $xp-gray;
+    height: 100%;
+    width: 25px;
+}
+
+@mixin xp-scrollbar-thumb {
+    @include xp-outset;
+    position: absolute;
+    box-sizing: border-box;
+    cursor: grab;
+
+    &:active {
+        border: 2px inset $xp_border;
+        cursor: grabbing;
+    }
+}
+
 
 .xp-box {
     @include xp;
@@ -40,19 +67,48 @@ $color-darkener: rgba(0, 0, 0, 0.5);
 .xp-btn {
     @include xp-outset;
     cursor: pointer;
-	text-transform: uppercase;
-	width: auto;
+    text-transform: uppercase;
+    width: auto;
 
     &:active {
         @include xp-inset;
     }
-	&:hover {
+
+    &:hover {
         box-shadow: 15px 27px 115px -22px $xp-dark-gray inset;
-	}
+    }
 
 }
 
-.xp-vertical-scrollbar-container {
+// .xp-scrollable-container-v-and-h::-webkit-scrollbar,
+.xp-scrollable-container-vertical::-webkit-scrollbar,
+.xp-scrollable-container-horizontal::-webkit-scrollbar,
+.xp-scrollable-vertical-body-overlay::-webkit-scrollbar {
+    // .xp-scrollable-v-and-h-body-overlay::-webkit-scrollbar {
+    display: none;
+}
+
+.xp-vertical-scrollbar {
+    @include xp-vertical-scrollbar;
+
+    .xp-vertical-scrollbar-thumb {
+        @include xp-scrollbar-thumb;
+        height: 100%;
+        width: 25px;
+    }
+}
+
+.xp-horizontal-scrollbar {
+    @include xp-vertical-scrollbar;
+
+    .xp-horizontal-scrollbar-thumb {
+        @include xp-scrollbar-thumb;
+        height: 25px;
+        width: 100%;
+    }
+}
+
+.xp-scrollable-container-vertical {
     display: flex;
     flex-direction: row;
     box-sizing: border-box;
@@ -61,41 +117,95 @@ $color-darkener: rgba(0, 0, 0, 0.5);
     height: 100%;
     overflow: hidden;
 
-    .xp-scrollbar {
-        @include  xp-inset;
-        background-color: $xp-gray;
-        height: 100%;
-        width: 25px;
-        .xp-scrollbar-thumb {
-            @include xp-outset;
-            position: absolute;
-            box-sizing: border-box;
-            top: 0px;
-            width: 25px;
-            cursor: grab;
-            &:active {
-                border: 2px inset $xp_border;
-                cursor:grabbing;
-            }
-        }
-    }
-
-    .xp-scrollbar-body-overlay {
+    .xp-scrollable-vertical-body-overlay {
+        @include xp;
         width: 100%;
         height: 100%;
-        background-color: $xp-gray;
-        box-sizing: border-box;
         overflow: scroll;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
-    .xp-scrollbar-body-overlay::-webkit-scrollbar {
-        display: none;
-      }
-      .xp-scrollbar-body-overlay {
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
-      }
 
-    .xp-scrollbar-body {
+}
+
+.xp-scrollable-container-v-and-h {
+    @include xp;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    overflow: hidden;
+    top: 0px;
+    left: 0px;
+    box-sizing: border-box;
+    grid-template-columns: 1fr 25px;
+    grid-template-rows: 1.3fr 25px;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "xp-scrollable-v-and-h-body-overlay xp-scrollbar-v-and-h-vertical"
+        "xp-scrollbar-v-and-h-horizontal xp-bottom-corner-divider";
+
+    .xp-scrollable-v-and-h-body-overlay,
+    .xp-scrollbar-v-and-h-vertical,
+    .xp-scrollbar-v-and-h-horizontal,
+    .xp-bottom-corner-divider {
+        @include xp;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+
+    .xp-scrollable-v-and-h-body-overlay {
+        grid-area: xp-scrollable-v-and-h-body-overlay;
+        overflow: scroll;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        border: 1px solid orange;
 
     }
+
+    .xp-scrollbar-v-and-h-vertical {
+        grid-area: xp-scrollbar-v-and-h-vertical;
+    }
+
+    .xp-scrollbar-v-and-h-horizontal {
+        grid-area: xp-scrollbar-v-and-h-horizontal;
+    }
+
+    .xp-bottom-corner-divider {
+        grid-area: xp-bottom-corner-divider;
+    }
+}
+
+
+.xp-scrollable-container-horizontal {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1.3fr 25px;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "xp-scrollable-horizontal-body-overlay"
+        "xp-scrollbar-container-horizontal";
+
+    .xp-scrollbar-container-horizontal,
+    .xp-scrollable-horizontal-body-overlay {
+        @include xp;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    .xp-scrollbar-container-horizontal {
+        grid-area: xp-scrollbar-container-horizontal;
+    }
+
+    .xp-scrollable-horizontal-body-overlay {
+        grid-area: xp-scrollable-horizontal-body-overlay;
+    }
+
 }

@@ -4,10 +4,12 @@ import { useSelector } from 'react-redux';
 import About from "./about/About";
 import Photos from "./photos/Photos";
 import Webcam from "./webcam/Webcam";
+import Draw from "./draw/Draw";
 const componentMap = {
     About,
-    Photos,
-    Webcam
+    Draw,
+    // Photos,
+    // Webcam
 };
 function Viewports() {
  const viewports = useSelector(state => state.viewports);

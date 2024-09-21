@@ -19,7 +19,7 @@ return (
     <XpScrollbar
         ref={scrollbarRef}
         className={"xp-box about-info-bottom-left"}
-        thumbColor="rgb(255, 171, 0)"
+        verticalThumbColor="rgb(255, 171, 0)"
     >
         <div className="xp-box about-description">
             <h2>Greetings,</h2>

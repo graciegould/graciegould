@@ -63,16 +63,13 @@ btn {
   box-shadow: 15px 27px 115px -22px #b3b3b3 inset;
 }
 
-.xp-vertical-scrollbar-container {
-  display: flex;
-  flex-direction: row;
-  box-sizing: border-box;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+.xp-scrollable-container-vertical::-webkit-scrollbar,
+.xp-scrollable-container-horizontal::-webkit-scrollbar,
+.xp-scrollable-vertical-body-overlay::-webkit-scrollbar {
+  display: none;
 }
-.xp-vertical-scrollbar-container .xp-scrollbar {
+
+.xp-vertical-scrollbar {
   border: 2px inset rgba(0, 0, 0, 0.5);
   border-bottom: 2px outset #d6d6d6;
   border-right: 2px outset rgba(0, 0, 0, 0.5);
@@ -83,7 +80,7 @@ btn {
   height: 100%;
   width: 25px;
 }
-.xp-vertical-scrollbar-container .xp-scrollbar .xp-scrollbar-thumb {
+.xp-vertical-scrollbar .xp-vertical-scrollbar-thumb {
   border: 2px outset rgba(255, 255, 255, 0.5);
   border-bottom: 2px outset #d6d6d6;
   border-right: 2px outset rgba(0, 0, 0, 0.5);
@@ -92,28 +89,153 @@ btn {
   outline: none;
   position: absolute;
   box-sizing: border-box;
-  top: 0px;
-  width: 25px;
   cursor: grab;
+  height: 100%;
+  width: 25px;
 }
-.xp-vertical-scrollbar-container .xp-scrollbar .xp-scrollbar-thumb:active {
+.xp-vertical-scrollbar .xp-vertical-scrollbar-thumb:active {
   border: 2px inset #d6d6d6;
   cursor: grabbing;
 }
-.xp-vertical-scrollbar-container .xp-scrollbar-body-overlay {
+
+.xp-horizontal-scrollbar {
+  border: 2px inset rgba(0, 0, 0, 0.5);
+  border-bottom: 2px outset #d6d6d6;
+  border-right: 2px outset rgba(0, 0, 0, 0.5);
+  background-color: #d9d9d9;
+  box-shadow: 15px 27px 115px -22px #b3b3b3 inset;
+  outline: none;
+  background-color: #e4e4e4;
+  height: 100%;
+  width: 25px;
+}
+.xp-horizontal-scrollbar .xp-horizontal-scrollbar-thumb {
+  border: 2px outset rgba(255, 255, 255, 0.5);
+  border-bottom: 2px outset #d6d6d6;
+  border-right: 2px outset rgba(0, 0, 0, 0.5);
+  border-radius: 0px;
+  background-color: #e4e4e4;
+  outline: none;
+  position: absolute;
+  box-sizing: border-box;
+  cursor: grab;
+  height: 25px;
+  width: 100%;
+}
+.xp-horizontal-scrollbar .xp-horizontal-scrollbar-thumb:active {
+  border: 2px inset #d6d6d6;
+  cursor: grabbing;
+}
+
+.xp-scrollable-container-vertical {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  position: absolute;
   width: 100%;
   height: 100%;
+  overflow: hidden;
+}
+.xp-scrollable-container-vertical .xp-scrollable-vertical-body-overlay {
+  border: 2px outset rgba(255, 255, 255, 0.5);
+  border-bottom: 2px outset #d6d6d6;
+  border-right: 2px outset rgba(0, 0, 0, 0.5);
+  border-radius: 0px;
   background-color: #e4e4e4;
+  outline: none;
   box-sizing: border-box;
+  width: 100%;
+  height: 100%;
   overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
-.xp-vertical-scrollbar-container .xp-scrollbar-body-overlay::-webkit-scrollbar {
-  display: none;
+
+.xp-scrollable-container-v-and-h {
+  border: 2px outset rgba(255, 255, 255, 0.5);
+  border-bottom: 2px outset #d6d6d6;
+  border-right: 2px outset rgba(0, 0, 0, 0.5);
+  border-radius: 0px;
+  background-color: #e4e4e4;
+  outline: none;
+  box-sizing: border-box;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  overflow: hidden;
+  top: 0px;
+  left: 0px;
+  box-sizing: border-box;
+  grid-template-columns: 1fr 25px;
+  grid-template-rows: 1.3fr 25px;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas: "xp-scrollable-v-and-h-body-overlay xp-scrollbar-v-and-h-vertical" "xp-scrollbar-v-and-h-horizontal xp-bottom-corner-divider";
 }
-.xp-vertical-scrollbar-container .xp-scrollbar-body-overlay {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+.xp-scrollable-container-v-and-h .xp-scrollable-v-and-h-body-overlay,
+.xp-scrollable-container-v-and-h .xp-scrollbar-v-and-h-vertical,
+.xp-scrollable-container-v-and-h .xp-scrollbar-v-and-h-horizontal,
+.xp-scrollable-container-v-and-h .xp-bottom-corner-divider {
+  border: 2px outset rgba(255, 255, 255, 0.5);
+  border-bottom: 2px outset #d6d6d6;
+  border-right: 2px outset rgba(0, 0, 0, 0.5);
+  border-radius: 0px;
+  background-color: #e4e4e4;
+  outline: none;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  position: absolute;
 }
+.xp-scrollable-container-v-and-h .xp-scrollable-v-and-h-body-overlay {
+  grid-area: xp-scrollable-v-and-h-body-overlay;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  border: 1px solid orange;
+}
+.xp-scrollable-container-v-and-h .xp-scrollbar-v-and-h-vertical {
+  grid-area: xp-scrollbar-v-and-h-vertical;
+}
+.xp-scrollable-container-v-and-h .xp-scrollbar-v-and-h-horizontal {
+  grid-area: xp-scrollbar-v-and-h-horizontal;
+}
+.xp-scrollable-container-v-and-h .xp-bottom-corner-divider {
+  grid-area: xp-bottom-corner-divider;
+}
+
+.xp-scrollable-container-horizontal {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1.3fr 25px;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas: "xp-scrollable-horizontal-body-overlay" "xp-scrollbar-container-horizontal";
+}
+.xp-scrollable-container-horizontal .xp-scrollbar-container-horizontal,
+.xp-scrollable-container-horizontal .xp-scrollable-horizontal-body-overlay {
+  border: 2px outset rgba(255, 255, 255, 0.5);
+  border-bottom: 2px outset #d6d6d6;
+  border-right: 2px outset rgba(0, 0, 0, 0.5);
+  border-radius: 0px;
+  background-color: #e4e4e4;
+  outline: none;
+  box-sizing: border-box;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.xp-scrollable-container-horizontal .xp-scrollbar-container-horizontal {
+  grid-area: xp-scrollbar-container-horizontal;
+}
+.xp-scrollable-container-horizontal .xp-scrollable-horizontal-body-overlay {
+  grid-area: xp-scrollable-horizontal-body-overlay;
+}
+
 .viewport {
   overflow: hidden;
 }
@@ -334,4 +456,58 @@ btn {
   position: absolute;
   display: flex;
   grid-area: about-info-bottom-left;
+}
+.draw-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+  grid-template-rows: 10% 70% 20%;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas: "draw-box-top draw-box-top draw-box-top" "draw-box-left draw-box-center draw-box-right" "draw-box-bottom draw-box-bottom draw-box-bottom";
+}
+
+.draw-box-center,
+.draw-box-top,
+.draw-box-left,
+.draw-box-right {
+  border: 2px outset rgba(255, 255, 255, 0.5);
+  border-bottom: 2px outset #d6d6d6;
+  border-right: 2px outset rgba(0, 0, 0, 0.5);
+  border-radius: 0px;
+  background-color: #e4e4e4;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.draw-box-center {
+  grid-area: draw-box-center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.draw-box-center .draw-canvas-overlay {
+  width: 100%;
+  height: 100%;
+}
+.draw-box-center canvas {
+  opacity: 0.5;
+}
+
+.draw-box-top {
+  grid-area: draw-box-top;
+}
+
+.draw-box-left {
+  grid-area: draw-box-left;
+}
+
+.draw-box-right {
+  grid-area: draw-box-right;
+}
+
+.draw-box-bottom {
+  grid-area: draw-box-bottom;
 }
