@@ -604,6 +604,11 @@ btn {
   align-items: center;
   overflow: hidden;
 }
+.snake-grid-cell .snake-game-fruit-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 
 .snake-game-emoji {
   font-size: 1em;

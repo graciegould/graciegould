@@ -49,6 +49,10 @@ function Viewport({ children, name }) {
       initialLeft={viewport.bounds.left}
       initialWidth={viewport.bounds.width}
       initialHeight={viewport.bounds.height}
+      maxWidth={viewport.bounds?.maxWidth}
+      maxHeight={viewport.bounds?.maxHeight}
+      minWidth={viewport.bounds?.minWidth}
+      minHeight={viewport.bounds?.minHeight}
       onUpdateSize={(bounds) => dispatch(update({ name, bounds }))}
       ref={containerRef}
       unit="%"

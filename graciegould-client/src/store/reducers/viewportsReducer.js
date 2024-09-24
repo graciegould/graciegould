@@ -30,10 +30,14 @@ const viewportsSlice = createSlice({
             name: "Draw",  
             hidden: false,
             bounds: {
-                width: percentageToPixels(30, "width", window.screen.width), 
-                height: percentageToPixels(50, "height", window.screen.height), 
+                width:300, 
+                height:345, 
                 top:  percentageToPixels(5, "top", window.screen.height), 
                 left: percentageToPixels(20, "left", window.screen.width), 
+                maxWidth: 500,
+                maxHeight: 575,
+                minWidth: 300,
+                minHeight: 345
             },            
             Component: 'Snake'
         },

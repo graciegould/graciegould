@@ -8,7 +8,10 @@ const Resizable = forwardRef(
       initialHeight = 500,
       initialLeft = 0,
       initialTop = 0,
-      unit = "px",
+      maxWidth = null,
+      maxHeight = null,
+      minWidth = 20,
+      minHeight = 20,
       onUpdateSize = null,
       dragHandlerRef = null,
       className = null,
@@ -21,12 +24,10 @@ const Resizable = forwardRef(
     const [top, setTop] = useState(initialTop);
 
     useEffect(() => {
-      function makeResizableDiv(div) {
+      function makeResizableDiv() {
         const element = containerRef.current;
         const parentElement = element.parentElement;
-
         const resizers = element.querySelectorAll(".resizer");
-        const minSize = 20;
         let originalWidth = 0;
         let originalHeight = 0;
         let originalX = 0;
@@ -69,24 +70,26 @@ const Resizable = forwardRef(
             } else if (currentResizer.classList.contains("bottom-left")) {
               newWidth = originalWidth - (e.pageX - originalMouseX);
               newHeight = originalHeight + (e.pageY - originalMouseY);
-              if (newWidth > minSize)
-                setLeft(originalX + (e.pageX - originalMouseX)); 
+              if (newWidth > minWidth)
+                setLeft(originalX + (e.pageX - originalMouseX));
             } else if (currentResizer.classList.contains("top-right")) {
               newWidth = originalWidth + (e.pageX - originalMouseX);
               newHeight = originalHeight - (e.pageY - originalMouseY);
-              if (newHeight > minSize)
-                setTop(originalY + (e.pageY - originalMouseY)); 
+              if (newHeight > minHeight)
+                setTop(originalY + (e.pageY - originalMouseY));
             } else if (currentResizer.classList.contains("top-left")) {
               newWidth = originalWidth - (e.pageX - originalMouseX);
               newHeight = originalHeight - (e.pageY - originalMouseY);
-              if (newWidth > minSize)
+              if (newWidth > minWidth)
                 setLeft(originalX + (e.pageX - originalMouseX));
-              if (newHeight > minSize)
+              if (newHeight > minHeight)
                 setTop(originalY + (e.pageY - originalMouseY));
             }
-
-            if (newWidth > minSize) setWidth(newWidth);
-            if (newHeight > minSize) setHeight(newHeight);
+            console.log("max width: ", maxWidth, "new width", newWidth);
+            if (maxWidth && newWidth > maxWidth) newWidth = maxWidth;
+            if (maxHeight && newHeight > maxHeight) newHeight = maxHeight;
+            if (newWidth > minWidth) setWidth(newWidth);
+            if (newHeight > minHeight) setHeight(newHeight);
           }
 
           function stopResize() {
@@ -131,7 +134,7 @@ const Resizable = forwardRef(
       border: "1px solid black",
       boxSizing: "border-box",
       position: "relative",
-      zIndex: 1,
+      zIndex: 0,
     };
 
     const resizerStyle = {
@@ -153,7 +156,7 @@ const Resizable = forwardRef(
     return (
       <div ref={containerRef} className={className ? className : "resizable"} style={resizableStyle}>
         <div className="resizers" style={resizersStyle}>
-            {children}
+          {children}
           <div
             className="resizer top-left"
             style={{ ...resizerStyle, ...resizerPositions.topLeft }}

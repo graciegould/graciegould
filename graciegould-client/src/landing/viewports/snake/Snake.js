@@ -1,15 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import emojis from "../../../utils/emojis";
-
 const GRID_ROW_AMOUNT = 20;
 const GRID_COL_AMOUNT = 20;
-
-function generateSnake() {
-  const snakeHead = getRandomRowAndColumn();
-  return Array.from({ length: 1 }, (_, index) => {
-    return { row: snakeHead.row + index, col: snakeHead.col };
-  });
-}
 
 function getRandomRowAndColumn(excludedCoordinates = []) {
   let row, col;
@@ -80,7 +71,7 @@ function Grid({ gameData, setGameData }) {
 
   useEffect(() => {
     const handleArrowKeys = (e) => {
-      let dir = null;
+      let dir = gameData.direction;
       switch (e.key) {
         case "ArrowUp":
           dir = "UP";
@@ -125,48 +116,49 @@ function Grid({ gameData, setGameData }) {
         let score = prev.score;
         let target = prev.target;
 
-        const tests = {
-          wallCollision: () => {
-            if (
-              head.row < 0 ||
-              head.row >= GRID_ROW_AMOUNT ||
-              head.col < 0 ||
-              head.col >= GRID_COL_AMOUNT
-            ) {
-              return true;
-            }
-          },
-          selfCollision: () => {
-            if (
-              prev.snake.some(
-                (cell) => cell.row === newHead.row && cell.col === newHead.col
-              )
-            ) {
-              return true;
-            }
-          },
-          targetCollision: () => {
-            if (head.row == prev.target.row && head.col == prev.target.col) {
-              return true;
-            }
-          },
-        };
+        function wallCollision() {
+          if (
+            head.row < 0 ||
+            head.row >= GRID_ROW_AMOUNT ||
+            head.col < 0 ||
+            head.col >= GRID_COL_AMOUNT
+          ) {
+            return true;
+          }
+        }
 
-        if (tests.wallCollision() || tests.selfCollision()) {
+        function selfCollision() {
+          if (
+            prev.snake.some(
+              (cell) => cell.row === newHead.row && cell.col === newHead.col
+            )
+          ) {
+            return true;
+          }
+        }
+
+        function targetCollision() {
+          if (head.row == prev.target.row && head.col == prev.target.col) {
+            return true;
+          }
+        }
+
+        if (wallCollision() || selfCollision()) {
           clearInterval(interval);
+          let newSnake = [getRandomRowAndColumn()];
           return {
             ...gameData,
-            snake: generateSnake(),
-            target: getRandomRowAndColumn(),
+            snake: [getRandomRowAndColumn()],
+            target: getRandomRowAndColumn(newSnake),
             score: 0,
             started: false,
             highScore: Math.max(score, highScore),
           };
         }
-        if (tests.targetCollision()) {
+        if (targetCollision()) {
           score = score + 1;
           newSnake.unshift({ ...target });
-          target = getRandomRowAndColumn();
+          target = getRandomRowAndColumn(newSnake);
         }
         newSnake.push(newHead);
         newSnake.shift();
@@ -205,40 +197,90 @@ function Grid({ gameData, setGameData }) {
 }
 
 function Cell({ target, snake, cell }) {
-  const [emoji, setEmoji] = useState(null);
-  function getRandomFruitEmoji() {
-    const fruitKeys = Object.keys(emojis.fruit);
-    const randomIndex = Math.floor(Math.random() * fruitKeys.length);
-    const randomKey = fruitKeys[randomIndex];
-    return emojis.fruit[randomKey];
+  const [fruit, setFruit] = useState(null);
+  const [skinColor, setSkinColor] = useState(null);
+  const snakeSkin = [
+    // 10 shades of pastel pink to primary red as a gradient
+    '#F8C8DC', '#F4A2BB', '#F07A9B', '#EB537B', '#E62C5A', '#E01542', '#D8102E', '#D00A1A', '#C60508', '#BD0000',
+
+    // 10 shades of primary red to orange to pastel orange
+    '#BD0000', '#C62A00', '#CF5500', '#D87F00', '#E2AA00', '#EBCE00', '#F3F100', '#F5D171', '#F8B282', '#FAB494',
+
+    // 10 shades of pastel orange to primary yellow to pastel yellow
+    '#FAB494', '#F9C18A', '#F9CE7F', '#F8DB75', '#F8E76A', '#F7F35F', '#F1EF53', '#EBEC48', '#E5E83C', '#DDE433',
+
+    // 10 shades of pastel yellow to primary green to pastel green
+    '#DDE433', '#D5DF29', '#CCE81F', '#C3D415', '#BACC0B', '#A3C400', '#8EBB00', '#7AB200', '#64A900', '#4FA100',
+
+    // 10 shades of pastel green to primary blue to pastel blue
+    '#4FA100', '#529CAD', '#5587BA', '#5A72C8', '#5F5DD6', '#6448E4', '#6A33F2', '#7330FF', '#7C4DFF', '#856AFF',
+
+    // 10 shades of pastel blue to primary purple to pastel purple
+    '#856AFF', '#8C7EFF', '#9382FF', '#9A86FF', '#A08AFF', '#A78EFF', '#AE91FF', '#B594FF', '#BC97FF', '#C39AFF',
+
+    // 10 shades of pastel purple to primary pink to pastel pink
+    '#C39AFF', '#C69ADD', '#CA96BB', '#CE928A', '#D18E69', '#D58A48', '#D98627', '#DC8410', '#E18100', '#E48000',
+  ];
+
+  const fruitIcons = [
+    "banana",
+    "coconut",
+    "dragon-fruit",
+    "kiwi",
+    "peach",
+    "pineapple",
+    "strawberry",
+    "watermelon",
+  ];
+
+  const getRandomFruit = () => {
+    const randomIndex = Math.floor(Math.random() * fruitIcons.length);
+    return fruitIcons[randomIndex]
   }
-  const snakeSkin = ["🟥", "🟧", "🟨", "🟩", "🟦", "🟪"];
-  const isSnake = snake.some(
-    (snakeCell) => snakeCell.row === cell.row && snakeCell.col === cell.col
-  );
-  const isTarget = target.row === cell.row && target.col === cell.col;
-  const isGround = !isSnake && !isTarget;
+
+  const cellType = () => {
+    let isSnake = snake.some(
+      (snakeCell) => snakeCell.row === cell.row && snakeCell.col === cell.col
+    );
+    const isTarget = target.row === cell.row && target.col === cell.col;
+    return isSnake ? "snake" : isTarget ? "target" : "ground";
+  }
   useEffect(() => {
-    if (isSnake) {
+    const _cellType = cellType();
+    console.log(_cellType);
+    if (cellType() === "snake") {
       const snakeIndex = snake.findIndex(
         (snakeCell) => snakeCell.row === cell.row && snakeCell.col === cell.col
       );
-      setEmoji(snakeSkin[snakeIndex % snakeSkin.length]);
+      setSkinColor(snakeSkin[snakeIndex % snakeSkin.length]);
       return;
-    } else if (isGround) {
-      setEmoji(null);
     }
-  }, [snake]);
+    if (cellType() === "ground") {
+      setSkinColor(null);
+      setFruit(null);
+      return;
+    }
+  }, [snake, target]);
+
   useEffect(() => {
-    if (isTarget) {
-      setEmoji(getRandomFruitEmoji());
-    } else if (isGround) {
-      setEmoji(null);
+    if (cellType() === "target" && !fruit) {
+      setFruit(getRandomFruit());
+      setSkinColor(snakeSkin[snake.length % snakeSkin.length]);
+      return;
+    } else {
+      setFruit(null);
     }
   }, [target]);
+
   return (
-    <div className="xp-box snake-grid-cell">
-      <div className="snake-game-emoji">{emoji}</div>
+    <div className="xp-box snake-grid-cell"
+      style={{
+        backgroundColor: skinColor ? skinColor : "black"
+      }}
+    >
+      <div className="snake-game-fruit-icon">
+        {fruit ? <img src={`images/snake-game/${fruit}.png`} /> : null}
+      </div>
     </div>
   );
 }
