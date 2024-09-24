@@ -24,7 +24,6 @@ function ScrollHandler(scrollbar, thumbElement, scrollContainer, update = () => 
       scrollbar.offsetHeight - thumbElement.offsetHeight;
     if (newPosition < 0) newPosition = 0;
     if (newPosition > maxScrollPosition) newPosition = maxScrollPosition;
-    console.log("newPosition", newPosition);
     update({
       top: newPosition
     });

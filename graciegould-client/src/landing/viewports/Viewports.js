@@ -4,10 +4,12 @@ import { useSelector } from 'react-redux';
 import About from "./about/About";
 import Photos from "./photos/Photos";
 import Webcam from "./webcam/Webcam";
+import Snake from "./snake/Snake";
 import Draw from "./draw/Draw";
 const componentMap = {
     About,
-    Draw,
+    // Draw,
+    Snake,
     // Photos,
     // Webcam
 };

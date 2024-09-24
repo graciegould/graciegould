@@ -1,69 +1,62 @@
-
-.photo-album-container {
-    position: relative;
+.photos-container {
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    background-color: $xp_light_gray;
-    border: 3px solid $xp_border;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-}
+    position: absolute;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 80% 1fr;
+    grid-auto-columns: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "photo-viewer"
+        "photo-thumbnail-list";
 
-.photo-viewer {
-    width: 100%;
-    height: 80%;
-    border: 1px inset $xp_dark_gray;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.photo-viewer {
-    width: 100%;
-    height: 80%;
-    border: 2px inset $xp_dark_gray;
-    background-color: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-
-    img {
+    .photo-thumbnail-list,
+    .photo-viewer {
+        @include xp;
         width: 100%;
         height: 100%;
-        // display: none;
-        object-fit: contain;
+        position: absolute;
     }
-}
 
-.thumbnail-scroll-bar {
-    width: 100%;
-    height: 5%;
-}
-
-.thumbnail-bar {
-    width: 100%;
-    height: 20%;
-    display: flex;
-    align-items: center;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    background-color: $xp_dark_gray;
-    border-top: 2px solid $xp_border;
-}
-
-.thumbnail {
-    margin: 0 5px;
-    border: 2px outset $xp_border;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-    object-fit: cover;
-    &:active {
-        border: 2px inset $xp_border;
+    .photo-viewer {
+        position: absolute;
+        grid-area: photo-viewer;
+        background-color: black;
+        .photo-viewer-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
     }
-}
-.thumbnail-scroll-bar-handler {
+    
+    .photo-thumbnail-list {
+        grid-area: photo-thumbnail-list;
+        .photo-thumbnail-images {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 5px;
+        
+            .photo-thumbnail-item {
+                flex: 0 0 10%;
+                height: 100%; 
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+            }
+            .photo-thumbnail {
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+            }
+        }
+        
+    }
+
 
 }

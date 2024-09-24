@@ -9,11 +9,13 @@
     "@testing-library/user-event": "^13.5.0",
     "gulp": "^5.0.0",
     "gulp-sass": "^5.1.0",
+    "p5.brush": "^1.1.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-redux": "^9.1.2",
     "react-scripts": "5.0.1",
     "sass": "^1.77.8",
+    "tinycolor2": "^1.6.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

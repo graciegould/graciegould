@@ -1,37 +1,67 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import XpScrollbar from "../../../utils/components/scrollbars/XpScrollbar";
 const Photos = () => {
-    const [selectedPhoto, setSelectedPhoto] = useState(null);
-    const thumbnailBarRef = useRef(null);
-    const path = "/images/landing/photo-album/";
-    const photos = [
-        path + "dog.jpg",
-        path + "spring-bunny.jpg",
-        path + "utopia.jpg",
-        path + "yard-work.jpg"
-    ];
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const thumbnailImagesRef = useRef(null);
+  const path = "/images/landing/photo-album/";
+  const photos = [
+    path + "dog.jpg",
+    path + "spring-bunny.jpg",
+    path + "utopia.jpg",
+    path + "yard-work.jpg",
+    path + "dog.jpg",
+    path + "spring-bunny.jpg",
+    path + "utopia.jpg",
+    path + "yard-work.jpg",
+    path + "dog.jpg",
+    path + "spring-bunny.jpg",
+    path + "utopia.jpg",
+    path + "yard-work.jpg",
+    path + "dog.jpg",
+    path + "spring-bunny.jpg",
+    path + "utopia.jpg",
+    path + "yard-work.jpg",
+  ];
 
-    return (
-      <div className="photo-album-container">
-        <div className="xp-box photo-viewer">
-          {selectedPhoto ? (
-            <img src={selectedPhoto} alt="Selected"     />
-          ) : (
-            <span>Select a photo below</span>
-          )}
-        </div>
-        <div className="xp-box thumbnail-bar" ref={thumbnailBarRef}>
-          {photos.map((photo, index) => (
-            <img
-              key={index}
-              src={photo}
-              alt={`Thumbnail ${index + 1}`}
-              className="thumbnail"
-              onClick={() => setSelectedPhoto(photo)}
-            />
-          ))}
-        </div>
+  useEffect(() => {
+
+  }, [selectedPhoto]);
+  return (
+    <div className="photos-container">
+      <div className="photo-viewer">
+        <img className="photo-viewer-image" src={photos[selectedPhoto]} />  
       </div>
-    );
-  };
+      <div className="xp-scrollbar photo-thumbnail-list">
+        <XpScrollbar
+          containerRef={thumbnailImagesRef}
+          horizontal={true}
+          vertical={false}
+        >
+          <div className="photo-thumbnail-images" ref={thumbnailImagesRef}>
+            {photos.map((photo, index) => (
+              <div
+                className={
+                  index == selectedPhoto
+                    ? "xp-selected photo-thumbnail-item"
+                    : "xp-btn photo-thumbnail-item"
+                }
+                key={"photo-thumbnail-item-" + index}
+                onClick={() => setSelectedPhoto(index)}
+              >
+                <img
+                  key={index}
+                  src={photo}
+                  alt={`Thumbnail ${index + 1}`}
+                  className="photo-thumbnail"
+                  onClick={() => setSelectedPhoto(photo)}
+                />
+              </div>
+            ))}
+          </div>
+        </XpScrollbar>
+      </div>
+    </div>
+  );
+};
 
-  export default Photos;
+export default Photos;

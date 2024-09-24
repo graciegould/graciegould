@@ -79,7 +79,6 @@ function percentageToPixels(percentage, property, relativeInstance = null) {
             if(relativeInstance instanceof HTMLElement) {
                 referenceValue = getComputedWidth(relativeInstance)
             } else if(typeof relativeInstance === 'number') {
-                console.log("property", property);
                 referenceValue = relativeInstance;
             }
         } else {

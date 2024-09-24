@@ -1,0 +1,77 @@
+.snake {
+    width: 100%;
+    height: 100%;
+    // position: absolute;
+}
+.snake * {
+    box-sizing: border-box;
+}
+.snake-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 15% 85%;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "snake-topbar"
+        "snake-grid";
+}
+
+.snake-grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(20, 5%);
+    grid-template-rows: repeat(20, 5%);
+    grid-auto-flow: row;
+    grid-area: snake-grid;
+    color: #111;
+    text-align: center;
+}
+
+.snake-grid-cell {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.snake-game-emoji {
+    font-size: 1em;
+    width:auto;
+    text-size-adjust: 100%;
+    height:auto;
+}
+
+.snake-topbar {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.snake-score,
+.snake-high-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.snake-score-label {
+    font-size: 1em;
+}
+
+.snake-score div,
+.snake-high-score div {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 5px;
+}
