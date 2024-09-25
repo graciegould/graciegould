@@ -1,0 +1,36 @@
+.desktop-container {
+position: absolute;
+width: 100%;
+height: 100%;
+display: grid;
+grid-template-columns: 100%;
+grid-template-rows: 3% 87% 15%;
+gap: 0px 0px;
+grid-auto-flow: row;
+grid-template-areas:
+    "desktop-top-bar"
+    "desktop-center"
+    "desktop-bottom-bar";
+}
+
+.desktop-center,
+.desktop-top-bar,
+.desktop-bottom-bar {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+.desktop-center {
+    grid-area: desktop-center;
+}
+
+.desktop-top-bar {
+    grid-area: desktop-top-bar;
+    z-index: 1000;
+}
+
+.desktop-bottom-bar {
+    grid-area: desktop-bottom-bar;
+    z-index: 1000;
+
+}

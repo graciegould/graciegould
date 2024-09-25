@@ -71,6 +71,7 @@ function Viewport({ children, name }) {
       maxHeight={viewport.bounds?.maxHeight}
       minWidth={viewport.bounds?.minWidth}
       minHeight={viewport.bounds?.minHeight}
+      minTop={0}
       onUpdateSize={(bounds) => dispatch(update({ name, bounds }))}
       ref={containerRef}
       style={{ zIndex: viewport.zIndex }}

@@ -12,6 +12,8 @@ const Resizable = forwardRef(
       maxHeight = null,
       minWidth = 20,
       minHeight = 20,
+      minTop = null,
+      minLeft= null,
       zIndex = 0,
       onUpdateSize = null,
       dragHandlerRef = null,
@@ -67,35 +69,48 @@ const Resizable = forwardRef(
           function resize(e) {
             let newWidth = originalWidth;
             let newHeight = originalHeight;
-
+            let newLeft = originalX;  
+            let newTop = originalY;
+          
             if (currentResizer.classList.contains("bottom-right")) {
               newWidth = originalWidth + (e.pageX - originalMouseX);
               newHeight = originalHeight + (e.pageY - originalMouseY);
             } else if (currentResizer.classList.contains("bottom-left")) {
               newWidth = originalWidth - (e.pageX - originalMouseX);
               newHeight = originalHeight + (e.pageY - originalMouseY);
-              if (newWidth > minWidth)
-                setLeft(originalX + (e.pageX - originalMouseX));
+              if (newWidth > minWidth) {
+                newLeft = originalX + (e.pageX - originalMouseX);
+              }
             } else if (currentResizer.classList.contains("top-right")) {
               newWidth = originalWidth + (e.pageX - originalMouseX);
               newHeight = originalHeight - (e.pageY - originalMouseY);
-              if (newHeight > minHeight)
-                setTop(originalY + (e.pageY - originalMouseY));
+              newTop = originalY + (e.pageY - originalMouseY);
             } else if (currentResizer.classList.contains("top-left")) {
               newWidth = originalWidth - (e.pageX - originalMouseX);
               newHeight = originalHeight - (e.pageY - originalMouseY);
-              if (newWidth > minWidth)
-                setLeft(originalX + (e.pageX - originalMouseX));
-              if (newHeight > minHeight)
-                setTop(originalY + (e.pageY - originalMouseY));
+              if (newWidth > minWidth) {
+                newLeft = originalX + (e.pageX - originalMouseX);
+              }
+              if (newHeight > minHeight) {
+                newTop = originalY + (e.pageY - originalMouseY);
+              }
             }
+            if (typeof minLeft === 'number' && newLeft < minLeft) {
+              newLeft = minLeft;
+            }
+            if (typeof minTop === 'number' && newTop < minTop) {
+              newTop = minTop;
+            }
+
             console.log("max width: ", maxWidth, "new width", newWidth);
             if (maxWidth && newWidth > maxWidth) newWidth = maxWidth;
             if (maxHeight && newHeight > maxHeight) newHeight = maxHeight;
             if (newWidth > minWidth) setWidth(newWidth);
             if (newHeight > minHeight) setHeight(newHeight);
+            
+            setLeft(newLeft); // Set left after checking minLeft
+            setTop(newTop);   // Set top after checking minTop
           }
-
           function stopResize() {
             window.removeEventListener("mousemove", resize);
           }
@@ -108,6 +123,12 @@ const Resizable = forwardRef(
           dragHandlerRef.current,
           { top, left, width, height },
           (position) => {
+            if (typeof minLeft === 'number' && position.left < minLeft) {
+              position.left = minLeft;
+            }
+            if (typeof minTop === 'number' && position.top < minTop) {
+              position.top = minTop;
+            }
             setTop(position.top);
             setLeft(position.left);
           }
@@ -158,7 +179,6 @@ const Resizable = forwardRef(
       bottomRight: { right: "-5px", bottom: "-5px", cursor: "nwse-resize" },
     };
 
-    console.log(props)
     return (
       <div ref={containerRef} className={className ? className : "resizable"} style={resizableStyle} id={id} {...props}>
         <div className="resizers" style={resizersStyle}>
