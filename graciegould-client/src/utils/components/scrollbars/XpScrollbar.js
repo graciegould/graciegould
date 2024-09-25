@@ -150,9 +150,10 @@ const VerticalScrollbar = ({
   }, []);
 
   useEffect(() => {
-    function makeScrollBar() {
+    function makeScrollBar(e) {
       let customScrolling = false;
       const startScrolling = (e) => {
+        e.stopPropagation();
         if (!scrollContainer.current || !verticalScrollbarThumbRef.current)
           return;
         const scrollbarHeight = verticalScrollbarRef.current.clientHeight;
@@ -169,18 +170,19 @@ const VerticalScrollbar = ({
           scrollContainer.current.scrollHeight -
           scrollContainer.current.clientHeight;
         scrollContainer.current.scrollTop = scrollPercentage * maxScrollTop;
-        verticalScrollbarThumbRef.current.style.top = `${
-          (newThumbPosition / scrollbarHeight) * 100
-        }%`;
+        verticalScrollbarThumbRef.current.style.top = `${(newThumbPosition / scrollbarHeight) * 100
+          }%`;
       };
 
-      const stopScrolling = () => {
+      const stopScrolling = (e) => {
+        e.stopPropagation();
         customScrolling = false;
         document.removeEventListener("mousemove", startScrolling);
         document.removeEventListener("mouseup", stopScrolling);
       };
 
       const handleMouseDownThumb = (e) => {
+        e.stopPropagation();
         e.preventDefault();
         initialMousePosition.current = e.clientY;
         initialThumbPosition.current =
@@ -201,9 +203,8 @@ const VerticalScrollbar = ({
         const maxThumbPosition =
           scrollbarHeight - (scrollbarHeight * verticalThumbHeight) / 100;
         const newThumbPosition = scrollPercentage * maxThumbPosition;
-        verticalScrollbarThumbRef.current.style.top = `${
-          (newThumbPosition / scrollbarHeight) * 100
-        }%`;
+        verticalScrollbarThumbRef.current.style.top = `${(newThumbPosition / scrollbarHeight) * 100
+          }%`;
       };
 
       verticalScrollbarThumbRef.current.addEventListener(
@@ -269,6 +270,7 @@ const HorizontalScrollbar = ({
       let customScrolling = false;
 
       const startScrolling = (e) => {
+        e.stopPropagation();
         if (!scrollContainer.current || !horizontalScrollbarThumbRef.current)
           return;
         const scrollbarWidth = horizontalScrollbarRef.current.clientWidth;
@@ -285,18 +287,19 @@ const HorizontalScrollbar = ({
           scrollContainer.current.scrollWidth -
           scrollContainer.current.clientWidth;
         scrollContainer.current.scrollLeft = scrollPercentage * maxScrollLeft;
-        horizontalScrollbarThumbRef.current.style.left = `${
-          (newThumbPosition / scrollbarWidth) * 100
-        }%`;
+        horizontalScrollbarThumbRef.current.style.left = `${(newThumbPosition / scrollbarWidth) * 100
+          }%`;
       };
 
-      const stopScrolling = () => {
+      const stopScrolling = (e) => {
+        e.stopPropagation();
         customScrolling = false;
         document.removeEventListener("mousemove", startScrolling);
         document.removeEventListener("mouseup", stopScrolling);
       };
 
       const handleMouseDownThumb = (e) => {
+        e.stopPropagation();
         e.preventDefault();
         initialMousePosition.current = { x: e.clientX, y: e.clientY };
         initialThumbPosition.current =
@@ -317,9 +320,8 @@ const HorizontalScrollbar = ({
         const maxThumbPosition =
           scrollbarWidth - (scrollbarWidth * horizontalThumbWidth) / 100;
         const newThumbPosition = scrollPercentage * maxThumbPosition;
-        horizontalScrollbarThumbRef.current.style.left = `${
-          (newThumbPosition / scrollbarWidth) * 100
-        }%`;
+        horizontalScrollbarThumbRef.current.style.left = `${(newThumbPosition / scrollbarWidth) * 100
+          }%`;
       };
 
       horizontalScrollbarThumbRef.current.addEventListener(

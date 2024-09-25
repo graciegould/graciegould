@@ -131,18 +131,6 @@ function formatValueWithUnit(input, unit = null) {
   return val;
 }
 
-function elementsOverlap(el1, el2) {
-  const domRect1 = el1.getBoundingClientRect();
-  const domRect2 = el2.getBoundingClientRect();
-
-  return !(
-    domRect1.top > domRect2.bottom ||
-    domRect1.right < domRect2.left ||
-    domRect1.bottom < domRect2.top ||
-    domRect1.left > domRect2.right
-  );
-}
-
 function percentOfOverlap(element1, element2) {
   /**
    * Calculate the percentage of the area of element 1 that is overlapped with element 2.
@@ -204,7 +192,6 @@ function boundaryBoxRelativeToParent(element, parent) {
 }
 export {
   formatValueWithUnit,
-  elementsOverlap,
   distanceFromCenter,
   percentOfOverlap,
   pixelsToPercentage,

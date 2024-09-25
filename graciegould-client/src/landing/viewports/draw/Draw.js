@@ -8,8 +8,8 @@ function Draw() {
   const p5Ref = useRef(null);
   const scrollbarRef = useRef(null);
   const sketchPad = new SketchPad();
-  
-   useEffect(() => {
+
+  useEffect(() => {
     sketchPad.init(p5Ref.current);
     return () => null;
   }, []);
@@ -43,7 +43,7 @@ function Draw() {
               key={"draw-tool-" + index}
               onClick={() => setSelectedTool(tool)}
             >
-              <img src={`/images/landing/icons/${tool}.png`} alt={tool} className="draw-tool-icon"/>
+              <img src={`/images/landing/icons/${tool}.png`} alt={tool} className="draw-tool-icon" />
             </button>
           ))}
         </div>
@@ -55,10 +55,10 @@ function Draw() {
 }
 
 function Colors() {
-    return (
-        <div className="xp-box draw-colors-container">
-            
-        </div>
-    );
+  return (
+    <div className="xp-box draw-colors-container">
+
+    </div>
+  );
 }
 export default Draw;
