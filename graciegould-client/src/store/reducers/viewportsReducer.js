@@ -10,7 +10,7 @@ const viewportsSlice = createSlice({
             zIndex: 4,
             bounds: {
                 width: percentageToPixels(40, "width", window.screen.width), 
-                height: percentageToPixels(70, "height", window.screen.height), 
+                height: percentageToPixels(30, "height", window.screen.height), 
                 top:  percentageToPixels(2, "top", window.screen.height), 
                 left: percentageToPixels(30, "left", window.screen.width), 
             },            
@@ -61,7 +61,7 @@ const viewportsSlice = createSlice({
         "webcam" : {
             name: "Webcam",  
             iconPath: "/images/landing-icons/photo-icon.png",
-            hidden: false,
+            hidden: true,
             zIndex: 0,
             bounds: {
                 width: percentageToPixels(30, "width", window.screen.width), 

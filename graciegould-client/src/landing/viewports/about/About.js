@@ -2,7 +2,6 @@ import { useRef } from "react";
 import XpScrollbar from "../../../utils/components/scrollbars/XpScrollbar";
 
 function About() {
-const scrollbarRef = useRef(null);
 return (
     <div className="xp-box  about-container">
         <ProfilePicture />
@@ -14,14 +13,13 @@ return (
 }
 
 function Description() {
-const scrollbarRef = useRef(null);
 return (
+    <div className="xp-box about-info-bottom-left">
+   
     <XpScrollbar
-        ref={scrollbarRef}
-        className={"xp-box about-info-bottom-left"}
         verticalThumbColor="rgb(255, 171, 0)"
     >
-        <div className="xp-box about-description">
+        <div className="about-description">
             <h2>Greetings,</h2>
             <h3>ABOUT ME</h3>
             <ul>
@@ -49,6 +47,7 @@ return (
             </ul>
         </div>
     </XpScrollbar>
+    </div>
 );
 }
 function Title() {
@@ -91,10 +90,8 @@ return (
 }
 
 function ContactInfo() {
-const scrollbarRef = useRef(null);
 return (
     <div
-        ref={scrollbarRef}
         className={"xp-box about-info-bottom-right"}
     >
         <div className="about-contact-info-container">

@@ -1,9 +1,8 @@
 import Resizable from "../../utils/components/resizable/Resizable";
 import XpButton from "../../utils/components/buttons/XpButton";
 import React, { useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
 import { update } from "../../store/reducers/viewportsReducer";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { pixelsToPercentage, percentageToPixels } from "../../utils/elements/units";
 
 function Viewport({ children, name }) {
@@ -71,7 +70,7 @@ function Viewport({ children, name }) {
       maxHeight={viewport.bounds?.maxHeight}
       minWidth={viewport.bounds?.minWidth}
       minHeight={viewport.bounds?.minHeight}
-      minTop={0}
+      minTop={window.screen.height / 30}
       onUpdateSize={(bounds) => dispatch(update({ name, bounds }))}
       ref={containerRef}
       style={{ zIndex: viewport.zIndex }}

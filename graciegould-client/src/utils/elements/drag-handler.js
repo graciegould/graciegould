@@ -1,6 +1,8 @@
 function DragHandler(element, dragHandler, initialPosition, update = () => {}) {
   const initialMousePosition = { x: 0, y: 0 };
   const initialElementPosition = initialPosition;
+  const parentElement = element.parentElement;
+
   const dragMouseDown = (e) => {
     e = e || window.event;
     e.preventDefault();

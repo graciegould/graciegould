@@ -6,7 +6,6 @@ import XpScrollbar from "../../../utils/components/scrollbars/XpScrollbar";
 function Draw() {
   const [selectedTool, setSelectedTool] = useState("pen");
   const p5Ref = useRef(null);
-  const scrollbarRef = useRef(null);
   const sketchPad = new SketchPad();
 
   useEffect(() => {
@@ -22,7 +21,6 @@ function Draw() {
     <div className="xp-box draw-container">
       <div className="draw-box-top"></div>
       <XpScrollbar
-        ref={scrollbarRef}
         className="draw-box-center"
         vertical={true}
         horizontal={true}

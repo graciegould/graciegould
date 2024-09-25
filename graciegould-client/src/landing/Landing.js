@@ -1,4 +1,4 @@
-import Desktop from "./Desktop";
+import Desktop from "./desktop/Desktop";
 
 function Landing() {
   return (
@@ -6,6 +6,6 @@ function Landing() {
         <Desktop />
     </div>
   );
-}
+} 
 
 export default Landing;

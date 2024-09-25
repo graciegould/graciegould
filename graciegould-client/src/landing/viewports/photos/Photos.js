@@ -33,7 +33,6 @@ const Photos = () => {
       </div>
       <div className="xp-scrollbar photo-thumbnail-list">
         <XpScrollbar
-          containerRef={thumbnailImagesRef}
           horizontal={true}
           vertical={false}
         >
