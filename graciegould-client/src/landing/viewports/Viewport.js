@@ -1,7 +1,7 @@
 import Resizable from "../../utils/components/resizable/Resizable";
 import XpButton from "../../utils/components/buttons/XpButton";
 import React, { useEffect, useRef } from "react";
-import { update } from "../../store/reducers/viewportsReducer";
+import {update, bringToFront, exit} from "../../store/reducers/viewportsReducer";
 import { useSelector, useDispatch } from "react-redux";
 import { pixelsToPercentage, percentageToPixels } from "../../utils/elements/units";
 
@@ -12,12 +12,9 @@ function Viewport({ children, name }) {
   const containerRef = useRef(null);
   const dragHandlerRef = useRef(null);
 
-  const handleExit = () => {
-    dispatch(update({ name: name, hidden: true }));
-    containerRef.current.style.display = "none";
-  };
 
   const handleMinimize = () => {
+    console.log(viewports)
     const bounds = {
       top: 100,
       left: 100,
@@ -43,22 +40,6 @@ function Viewport({ children, name }) {
     dispatch(update({ name, bounds }));
   };
 
-  const handleMouseDown = (e) => {
-    let sortedViewportKeys = Object.keys(viewports).sort((a, b) => viewports[a].zIndex - viewports[b].zIndex);
-    let closestViewport = sortedViewportKeys[sortedViewportKeys.length - 1];
-    if (closestViewport === name) return;
-    let initialZIndex = viewport.zIndex;
-    sortedViewportKeys.forEach((viewportName) => {
-      if (viewportName !== name) {
-        let _zIndex = viewports[viewportName].zIndex;
-        if (_zIndex > initialZIndex) {
-          dispatch(update({ name: viewportName, zIndex: _zIndex - 1 }));
-        }
-      }
-    });
-    dispatch(update({ name, zIndex: Object.keys(viewport).length - 1 }));
-  };
-
 
   return (
     <Resizable
@@ -76,11 +57,11 @@ function Viewport({ children, name }) {
       style={{ zIndex: viewport.zIndex }}
       dragHandlerRef={dragHandlerRef}
       className={`viewport-${name}`}
-      onMouseDown={handleMouseDown}
+      onMouseDown={() => dispatch(bringToFront({ name }))}
     >
-      <div className="xp-box viewport-top-bar">
+      <div className="xp viewport-top-bar">
         <div className="viewport-btn__container">
-          <XpButton onClick={handleExit}>X</XpButton>
+          <XpButton onClick={()=> dispatch(exit({ name }))}>X</XpButton>
         </div>
         <div className="viewport-btn__container">
           <XpButton onClick={handleMinimize}>-</XpButton>
@@ -88,7 +69,7 @@ function Viewport({ children, name }) {
         <div className="viewport-btn__container">
           <XpButton onClick={handleMaximize}>[]</XpButton>
         </div>
-        <div className="xp-box viewport-drag-handler" ref={dragHandlerRef}>
+        <div className="xp viewport-drag-handler" ref={dragHandlerRef}>
           {name}
         </div>
       </div>

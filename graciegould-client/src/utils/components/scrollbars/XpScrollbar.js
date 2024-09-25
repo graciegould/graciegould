@@ -1,38 +1,38 @@
 import { forwardRef, useEffect, useRef, useState } from "react";
-const XpScrollbar = forwardRef(
-  (
-    {
-      children,
-      className = null,
-      verticalThumbColor = "#e4e3e3",
-      verticalScrollbarColor = "#f1f1f1",
-      vertical = true,
-      horizontal = false,
-    },
-    ref
-  ) => {
-    let ScrollbarComponent = null;
+const XpScrollbar = ({
+  children,
+  vertical = true,
+  horizontal = false,
+  className = null,
+  verticalThumbColor = "#e4e3e3",
+  verticalScrollbarColor = "#f1f1f1",
+}) => {
+  let ScrollbarComponent = null;
 
-    if (vertical && horizontal) {
-      ScrollbarComponent = XpScrollbarVerticalAndHorizontal;
-    } else if (vertical) {
-      ScrollbarComponent = XpScrollbarVertical;
-    } else if (horizontal) {
-      ScrollbarComponent = XpScrollbarHorizontal;
-    }
 
-    return (
-      <ScrollbarComponent
-        ref={ref}
-        className={className}
-        verticalThumbColor={verticalThumbColor}
-        verticalScrollbarColor={verticalScrollbarColor}
-      >
-        {children}
-      </ScrollbarComponent>
-    );
+  if (vertical && horizontal) {
+    console.log("vertical and horizontal", className);
+    ScrollbarComponent = XpScrollbarVerticalAndHorizontal;
   }
-);
+  else if (vertical) {
+    console.log("vertical", className);
+    ScrollbarComponent = XpScrollbarVertical;
+  }
+  else if (horizontal) {
+    console.log("horizontal", className);
+    ScrollbarComponent = XpScrollbarHorizontal;
+  }
+
+  return (
+    <ScrollbarComponent
+      className={className}
+      verticalThumbColor={verticalThumbColor}
+      verticalScrollbarColor={verticalScrollbarColor}
+    >
+      {children}
+    </ScrollbarComponent>
+  );
+}
 
 const XpScrollbarVerticalAndHorizontal = ({
   children,
@@ -43,6 +43,7 @@ const XpScrollbarVerticalAndHorizontal = ({
   horizontalScrollbarColor = "#f1f1f1",
 }) => {
   const scrollContainer = useRef(null);
+  console.log("vertical and horizontal container", className);
   return (
     <div className={className}>
       <div className="xp-scrollable-container-v-and-h">
@@ -112,11 +113,13 @@ const XpScrollbarVertical = ({
         >
           {children}
         </div>
+        <div className="xp-scrollbar-vertical-container">
         <VerticalScrollbar
           scrollContainer={scrollContainer}
           verticalThumbColor={verticalThumbColor}
           verticalScrollbarColor={verticalScrollbarColor}
         />
+        </div>
       </div>
     </div>
   );

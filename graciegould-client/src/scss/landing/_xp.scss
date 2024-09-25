@@ -33,19 +33,6 @@ $color-darkener: rgba(0, 0, 0, 0.5);
     box-sizing: border-box;
 }
 
-@mixin xp-vertical-scrollbar {
-    @include xp-inset;
-    background-color: $xp-gray;
-    height: 100%;
-    width: 25px;
-}
-
-@mixin xp-horizontal-scrollbar {
-    @include xp-inset;
-    background-color: $xp-gray;
-    width: 100%;
-    height: 25px;
-}
 
 @mixin xp-scrollbar-thumb {
     @include xp-outset;
@@ -59,20 +46,15 @@ $color-darkener: rgba(0, 0, 0, 0.5);
     }
 }
 
-
-.xp-box {
+.xp {
     @include xp;
+    box-sizing: border-box
 }
-
 .xp-btn {
     @include xp-outset;
     cursor: pointer;
     text-transform: uppercase;
     width: auto;
-
-    &:active {
-        @include xp-inset;
-    }
 
     &:hover {
         box-shadow: 15px 27px 115px -22px $xp-dark-gray inset;
@@ -80,9 +62,12 @@ $color-darkener: rgba(0, 0, 0, 0.5);
 
 }
 
+.xp-btn:active {
+    @include xp-inset;
+}
 .xp-selected {
     @include xp-inset;
-    border-style: groove; 
+    border-style: groove;
 }
 
 .xp-padded-container {
@@ -90,7 +75,7 @@ $color-darkener: rgba(0, 0, 0, 0.5);
     padding: 10px;
 }
 
-.xp-box-shadow {
+.xp-shadow {
     @include xp-inset;
     background-color: $xp-gray;
     box-shadow: 15px 27px 115px -22px $xp-dark-gray inset;
@@ -105,45 +90,76 @@ $color-darkener: rgba(0, 0, 0, 0.5);
     display: none;
 }
 
+
 .xp-vertical-scrollbar {
-    @include xp-vertical-scrollbar;
+    @include xp-inset;
+    background-color: $xp-gray;
+    height: 100%;
+    width: 25px;
+    box-sizing: border-box;
 }
 
 
 .xp-vertical-scrollbar-thumb {
-    height: 100%;
-    width: 25px;
     @include xp-scrollbar-thumb;
+    & {
+        height: 100%;
+        width: 100%;
+        box-sizing: border-box;
+    }
 }
 
 .xp-horizontal-scrollbar {
-    @include xp-horizontal-scrollbar;
+    @include xp-inset;
+    & {
+        background-color: $xp-gray;
+        width: 100%;
+        height: 25px;
+    }
 }
 
 .xp-horizontal-scrollbar-thumb {
-    height: 25px;
-    width: 100%;
     @include xp-scrollbar-thumb;
+    & {
+        height: 25px;
+        width: 100%;
+    }
 }
 
 .xp-scrollable-container-vertical {
-    display: flex;
-    flex-direction: row;
-    box-sizing: border-box;
     position: absolute;
+    box-sizing: border-box;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 25px;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+        "xp-scrollable-vertical-body-overlay xp-scrollbar-vertical-container";
 
-    .xp-scrollable-vertical-body-overlay {
+
+    .xp-scrollable-vertical-body-overlay,
+    .xp-scrollbar-vertical-container {
         @include xp;
+        box-sizing: border-box;
+        position: absolute;
         width: 100%;
         height: 100%;
-        overflow: scroll;
-        -ms-overflow-style: none;
-        scrollbar-width: none;
     }
 
+    .xp-scrollable-vertical-body-overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        grid-area: xp-scrollable-vertical-body-overlay;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        overflow: scroll;
+    }
+
+    .xp-scrollbar-vertical-container {
+        grid-area: xp-scrollbar-vertical-container;
+    }
 }
 
 .xp-scrollable-container-v-and-h {
@@ -192,6 +208,7 @@ $color-darkener: rgba(0, 0, 0, 0.5);
     .xp-bottom-corner-divider {
         grid-area: xp-bottom-corner-divider;
     }
+    
 }
 
 
@@ -207,25 +224,26 @@ $color-darkener: rgba(0, 0, 0, 0.5);
     grid-template-areas:
         "xp-scrollable-horizontal-body-overlay"
         "xp-scrollbar-container-horizontal";
-
     overflow: hidden;
 
     .xp-scrollbar-container-horizontal,
     .xp-scrollable-horizontal-body-overlay {
-        @include xp;
+        // @include xp;
         position: absolute;
         width: 100%;
         height: 100%;
+        box-sizing: border-box;
     }
-
-    .xp-scrollbar-container-horizontal {
-        grid-area: xp-scrollbar-container-horizontal;
-        height: 25px;
-    }
-
     .xp-scrollable-horizontal-body-overlay {
         overflow: scroll;
         grid-area: xp-scrollable-horizontal-body-overlay;
     }
-
+    
+    .xp-scrollbar-container-horizontal {
+        grid-area: xp-scrollbar-container-horizontal;
+        height: 25px;
+        width: 100%;
+        box-sizing: border-box;
+    
+    }
 }

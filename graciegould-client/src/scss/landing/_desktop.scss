@@ -11,7 +11,41 @@
     width: 100%;
 }
 
-.desktop-center {}
+.desktop-center {
+    width: 100%;
+    position: absolute;
+    box-sizing: border-box;
+    .desktop-icons {
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        display: grid;
+
+        .desktop-icon-container {
+            box-sizing: border-box;
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+            .desktop-icon-label {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: bold;
+            }
+        }
+        .desktop-icon-container img:hover {
+          animation: spin 1s linear infinite;
+        }
+    
+    
+    }
+}
 
 .desktop-top-bar {
     top: 0;
@@ -23,6 +57,8 @@
     box-sizing: border-box;
 
     .desktop-start-menu {
+        position: absolute;
+        width: 100%;
         height: 100%;
 
         .desktop-start-menu-btn {
@@ -31,7 +67,6 @@
             text-align: center;
             z-index: 102;
             box-sizing: border-box;
-
         }
 
         .desktop-start-menu-contents-container {
@@ -40,21 +75,44 @@
             width: 100%;
             bottom: 100%;
             box-sizing: border-box;
-
-            overflow: scroll;
-
-            .desktop-start-menu-contents {
+            overflow: hidden;
+            .desktop-start-menu-items-container {
                 box-sizing: border-box;
                 width: 100%;
                 height: 100%;
-                border: 5px solid black
+                border: 5px solid black;
             }
 
-            .desktop-start-menu-item {
+            .desktop-start-menu-items {
+                box-sizing: border-box;
+                border: 3px solid pink;
                 width: 100%;
-                display: flex;
+                height: 100%;
+                position: absolute;
                 font-size: 30px;
+                .desktop-start-menu-item {
+                    box-sizing: border-box;
+                    width: 100%;
+                    height: 100px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                    &:hover {
+                        // background-color: $light_gray;
+                    }
+                }
             }
         }
+    }
+}
+
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
     }
 }

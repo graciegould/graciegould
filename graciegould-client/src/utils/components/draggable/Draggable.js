@@ -7,13 +7,14 @@ const Draggable = forwardRef(
       dragHandlerRef,
       initialLeft = 0,
       initialTop = 0,
-      initialWidth = 500,
-      initialHeight = 500,
+      initialWidth = 100,
+      initialHeight = 100,
       onUpdatePosition = null,
       id = "draggable-div",
     },
     containerRef
   ) => {
+
 
     const [position, setPosition] = useState({
       top: initialTop,

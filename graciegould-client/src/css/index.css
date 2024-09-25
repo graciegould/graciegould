@@ -30,13 +30,14 @@ btn {
   height: var(--screen-height);
 }
 
-.xp-box {
+.xp {
   border: 2px outset rgba(255, 255, 255, 0.5);
   border-bottom: 2px outset #d6d6d6;
   border-right: 2px outset rgba(0, 0, 0, 0.5);
   border-radius: 0px;
   background-color: #e4e4e4;
   outline: none;
+  box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -51,6 +52,10 @@ btn {
   text-transform: uppercase;
   width: auto;
 }
+.xp-btn:hover {
+  box-shadow: 15px 27px 115px -22px #b3b3b3 inset;
+}
+
 .xp-btn:active {
   border: 2px inset rgba(0, 0, 0, 0.5);
   border-bottom: 2px inset #d6d6d6;
@@ -58,9 +63,6 @@ btn {
   background-color: #d9d9d9;
   box-shadow: 15px 27px 115px -22px #b3b3b3 inset;
   outline: none;
-}
-.xp-btn:hover {
-  box-shadow: 15px 27px 115px -22px #b3b3b3 inset;
 }
 
 .xp-selected {
@@ -84,7 +86,7 @@ btn {
   padding: 10px;
 }
 
-.xp-box-shadow {
+.xp-shadow {
   border: 2px inset rgba(0, 0, 0, 0.5);
   border-bottom: 2px inset #d6d6d6;
   border-right: 2px inset rgba(0, 0, 0, 0.5);
@@ -114,11 +116,10 @@ btn {
   background-color: #e4e4e4;
   height: 100%;
   width: 25px;
+  box-sizing: border-box;
 }
 
 .xp-vertical-scrollbar-thumb {
-  height: 100%;
-  width: 25px;
   border: 2px outset rgba(255, 255, 255, 0.5);
   border-bottom: 2px outset #d6d6d6;
   border-right: 2px outset rgba(0, 0, 0, 0.5);
@@ -133,6 +134,11 @@ btn {
   border: 2px inset #d6d6d6;
   cursor: grabbing;
 }
+.xp-vertical-scrollbar-thumb {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
 
 .xp-horizontal-scrollbar {
   border: 2px inset rgba(0, 0, 0, 0.5);
@@ -141,14 +147,14 @@ btn {
   background-color: #d9d9d9;
   box-shadow: 15px 27px 115px -22px #b3b3b3 inset;
   outline: none;
+}
+.xp-horizontal-scrollbar {
   background-color: #e4e4e4;
   width: 100%;
   height: 25px;
 }
 
 .xp-horizontal-scrollbar-thumb {
-  height: 25px;
-  width: 100%;
   border: 2px outset rgba(255, 255, 255, 0.5);
   border-bottom: 2px outset #d6d6d6;
   border-right: 2px outset rgba(0, 0, 0, 0.5);
@@ -163,17 +169,23 @@ btn {
   border: 2px inset #d6d6d6;
   cursor: grabbing;
 }
+.xp-horizontal-scrollbar-thumb {
+  height: 25px;
+  width: 100%;
+}
 
 .xp-scrollable-container-vertical {
-  display: flex;
-  flex-direction: row;
-  box-sizing: border-box;
   position: absolute;
+  box-sizing: border-box;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 25px;
+  grid-template-rows: 1fr;
+  grid-template-areas: "xp-scrollable-vertical-body-overlay xp-scrollbar-vertical-container";
 }
-.xp-scrollable-container-vertical .xp-scrollable-vertical-body-overlay {
+.xp-scrollable-container-vertical .xp-scrollable-vertical-body-overlay,
+.xp-scrollable-container-vertical .xp-scrollbar-vertical-container {
   border: 2px outset rgba(255, 255, 255, 0.5);
   border-bottom: 2px outset #d6d6d6;
   border-right: 2px outset rgba(0, 0, 0, 0.5);
@@ -181,11 +193,22 @@ btn {
   background-color: #e4e4e4;
   outline: none;
   box-sizing: border-box;
+  box-sizing: border-box;
+  position: absolute;
   width: 100%;
   height: 100%;
-  overflow: scroll;
+}
+.xp-scrollable-container-vertical .xp-scrollable-vertical-body-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  grid-area: xp-scrollable-vertical-body-overlay;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  overflow: scroll;
+}
+.xp-scrollable-container-vertical .xp-scrollbar-vertical-container {
+  grid-area: xp-scrollbar-vertical-container;
 }
 
 .xp-scrollable-container-v-and-h {
@@ -255,24 +278,20 @@ btn {
 }
 .xp-scrollable-container-horizontal .xp-scrollbar-container-horizontal,
 .xp-scrollable-container-horizontal .xp-scrollable-horizontal-body-overlay {
-  border: 2px outset rgba(255, 255, 255, 0.5);
-  border-bottom: 2px outset #d6d6d6;
-  border-right: 2px outset rgba(0, 0, 0, 0.5);
-  border-radius: 0px;
-  background-color: #e4e4e4;
-  outline: none;
-  box-sizing: border-box;
   position: absolute;
   width: 100%;
   height: 100%;
-}
-.xp-scrollable-container-horizontal .xp-scrollbar-container-horizontal {
-  grid-area: xp-scrollbar-container-horizontal;
-  height: 25px;
+  box-sizing: border-box;
 }
 .xp-scrollable-container-horizontal .xp-scrollable-horizontal-body-overlay {
   overflow: scroll;
   grid-area: xp-scrollable-horizontal-body-overlay;
+}
+.xp-scrollable-container-horizontal .xp-scrollbar-container-horizontal {
+  grid-area: xp-scrollbar-container-horizontal;
+  height: 25px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .viewports {
@@ -359,6 +378,7 @@ btn {
 .photos-container .photo-thumbnail-list .photo-thumbnail-images {
   height: 100%;
   width: 100%;
+  position: absolute;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -495,10 +515,11 @@ btn {
   height: 100%;
   position: absolute;
   grid-area: about-info-bottom-left;
+  box-sizing: border-box;
 }
 .about-info-bottom-left .about-description {
+  box-sizing: border-box;
   width: 100%;
-  height: 100%;
 }
 
 .draw-container {
@@ -516,7 +537,8 @@ btn {
 .draw-box-center,
 .draw-box-top,
 .draw-box-left,
-.draw-box-right {
+.draw-box-right,
+.draw-box-bottom {
   border: 2px outset rgba(255, 255, 255, 0.5);
   border-bottom: 2px outset #d6d6d6;
   border-right: 2px outset rgba(0, 0, 0, 0.5);
@@ -524,27 +546,40 @@ btn {
   background-color: #e4e4e4;
   outline: none;
   box-sizing: border-box;
+}
+.draw-box-center,
+.draw-box-top,
+.draw-box-left,
+.draw-box-right,
+.draw-box-bottom {
   width: 100%;
   height: 100%;
+  overflow: hidden;
   position: absolute;
 }
 
 .draw-box-center {
   grid-area: draw-box-center;
-  width: 100%;
-  height: 100%;
-  position: absolute;
+  overflow: hidden;
 }
 .draw-box-center .draw-canvas-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.draw-box-center canvas {
   width: 100%;
   height: 100%;
 }
+
 .draw-box-top {
   grid-area: draw-box-top;
 }
 
 .draw-box-left {
   grid-area: draw-box-left;
+  position: absolute;
 }
 .draw-box-left .draw-tools-container {
   width: 100%;
@@ -665,6 +700,39 @@ btn {
   width: 100%;
 }
 
+.desktop-center {
+  width: 100%;
+  position: absolute;
+  box-sizing: border-box;
+}
+.desktop-center .desktop-icons {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: grid;
+}
+.desktop-center .desktop-icons .desktop-icon-container {
+  box-sizing: border-box;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+.desktop-center .desktop-icons .desktop-icon-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.desktop-center .desktop-icons .desktop-icon-container .desktop-icon-label {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+.desktop-center .desktop-icons .desktop-icon-container img:hover {
+  animation: spin 1s linear infinite;
+}
+
 .desktop-top-bar {
   top: 0;
 }
@@ -675,6 +743,8 @@ btn {
   box-sizing: border-box;
 }
 .desktop-bottom-bar .desktop-start-menu {
+  position: absolute;
+  width: 100%;
   height: 100%;
 }
 .desktop-bottom-bar .desktop-start-menu .desktop-start-menu-btn {
@@ -690,16 +760,36 @@ btn {
   width: 100%;
   bottom: 100%;
   box-sizing: border-box;
-  overflow: scroll;
+  overflow: hidden;
 }
-.desktop-bottom-bar .desktop-start-menu .desktop-start-menu-contents-container .desktop-start-menu-contents {
+.desktop-bottom-bar .desktop-start-menu .desktop-start-menu-contents-container .desktop-start-menu-items-container {
   box-sizing: border-box;
   width: 100%;
   height: 100%;
   border: 5px solid black;
 }
-.desktop-bottom-bar .desktop-start-menu .desktop-start-menu-contents-container .desktop-start-menu-item {
+.desktop-bottom-bar .desktop-start-menu .desktop-start-menu-contents-container .desktop-start-menu-items {
+  box-sizing: border-box;
+  border: 3px solid pink;
   width: 100%;
-  display: flex;
+  height: 100%;
+  position: absolute;
   font-size: 30px;
+}
+.desktop-bottom-bar .desktop-start-menu .desktop-start-menu-contents-container .desktop-start-menu-items .desktop-start-menu-item {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

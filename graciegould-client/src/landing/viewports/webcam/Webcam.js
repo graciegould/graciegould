@@ -11,12 +11,12 @@ const Webcam = () => {
   }, []);
 
   return (
-    <div className="xp-box webcam-container">
-      <div className="xp-box webcam-top-bar-container"></div>
-      <div className="xp-box webcam-video-container">
+    <div className="xp webcam-container">
+      <div className="xp webcam-top-bar-container"></div>
+      <div className="xp webcam-video-container">
         <video ref={videoRef} autoPlay></video>
       </div>
-      <div className="xp-box webcam-bottom-bar-container"></div>
+      <div className="xp webcam-bottom-bar-container"></div>
     </div>
   );
 };

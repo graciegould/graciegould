@@ -1,7 +1,7 @@
 .draw-container {
     position: absolute;
     width: 100%;
-    height:100%;
+    height: 100%;
     display: grid;
     grid-template-columns: 10% 80% 10%;
     grid-template-rows: 10% 70% 20%;
@@ -12,26 +12,38 @@
         "draw-box-left draw-box-center draw-box-right"
         "draw-box-bottom draw-box-bottom draw-box-bottom";
 }
+
 .draw-box-center,
 .draw-box-top,
 .draw-box-left,
-.draw-box-right {
+.draw-box-right,
+.draw-box-bottom {
     @include xp;
-    width: 100%;
-    height: 100%;
-    position: absolute;
 
-}
-.draw-box-center {
-    grid-area: draw-box-center;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    .draw-canvas-overlay {
+    & {
         width: 100%;
         height: 100%;
+        overflow: hidden;
+        position: absolute;
     }
+
+
+}
+
+.draw-box-center {
+    grid-area: draw-box-center;
+    overflow: hidden;
+
+    .draw-canvas-overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
     canvas {
+        width: 100%;
+        height: 100%;
     }
 
 }
@@ -42,6 +54,7 @@
 
 .draw-box-left {
     grid-area: draw-box-left;
+    position: absolute;
 
     .draw-tools-container {
         width: 100%;

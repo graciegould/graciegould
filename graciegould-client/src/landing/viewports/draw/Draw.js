@@ -20,15 +20,16 @@ function Draw() {
   return (
     <div className="xp-box draw-container">
       <div className="draw-box-top"></div>
-      <XpScrollbar
-        className="draw-box-center"
-        vertical={true}
-        horizontal={true}
-      >
+      <div className="draw-box-center">
         <div className="draw-canvas-overlay">
-          <Sketch ref={p5Ref} width={800} height={600} />
+          <XpScrollbar
+            vertical={true}
+            horizontal={true}
+          >
+            <Sketch ref={p5Ref} width={800} height={600} />
+          </XpScrollbar>
         </div>
-      </XpScrollbar>
+      </div>
       <div className="draw-box-left">
         <div className="draw-tools-container">
           {Object.keys(sketchPad.tools).map((tool, index) => (

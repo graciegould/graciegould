@@ -3,7 +3,7 @@ import XpScrollbar from "../../../utils/components/scrollbars/XpScrollbar";
 
 function About() {
 return (
-    <div className="xp-box  about-container">
+    <div className="xp  about-container">
         <ProfilePicture />
         <Title />
         <ContactInfo />
@@ -14,11 +14,9 @@ return (
 
 function Description() {
 return (
-    <div className="xp-box about-info-bottom-left">
+    <div className="xp about-info-bottom-left">
    
-    <XpScrollbar
-        verticalThumbColor="rgb(255, 171, 0)"
-    >
+    <XpScrollbar verticalThumbColor="rgb(255, 171, 0)">
         <div className="about-description">
             <h2>Greetings,</h2>
             <h3>ABOUT ME</h3>
@@ -52,8 +50,8 @@ return (
 }
 function Title() {
 return (
-    <div className="xp-box about-info-top-right">
-        <div className="xp-box about-title">
+    <div className="xp about-info-top-right">
+        <div className="xp about-title">
             <div className="about-title-container">
                 <div className="about-title-name">
                     <h1>GRACIE E. GOULD </h1>
@@ -78,8 +76,8 @@ return (
 }
 function ProfilePicture() {
 return (
-    <div className="xp-box about-profile-pic">
-        <div className="xp-box about-profile-pic-container">
+    <div className="xp about-profile-pic">
+        <div className="xp about-profile-pic-container">
             <img
                 className="about-profile-pic-image"
                 src="/images/landing/profile-image.jpg"
@@ -92,7 +90,7 @@ return (
 function ContactInfo() {
 return (
     <div
-        className={"xp-box about-info-bottom-right"}
+        className={"xp about-info-bottom-right"}
     >
         <div className="about-contact-info-container">
             <div className="about-contact-info">

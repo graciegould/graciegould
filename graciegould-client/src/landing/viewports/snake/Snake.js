@@ -37,11 +37,11 @@ function Snake() {
 
 function Topbar({ gameData, setGameData }) {
   return (
-    <div className="xp-box snake-topbar">
-      <div className="xp-box snake-score">
+    <div className="xp snake-topbar">
+      <div className="xp snake-score">
         <div className="snake-score-label">SCORE: {gameData.score}</div>
       </div>
-      <div className="xp-box snake-high-score">
+      <div className="xp snake-high-score">
         <div className="snake-score-label">
           HIGH SCORE: {gameData.highScore}
         </div>
@@ -179,7 +179,7 @@ function Grid({ gameData, setGameData }) {
     return () => clearInterval(interval);
   }, [gameData]);
   return (
-    <div className="xp-box snake-grid">
+    <div className="xp snake-grid">
       {grid.map((row, rowIndex) => (
         <div key={rowIndex} className="grid-row">
           {row.map((cell, colIndex) => (
@@ -273,7 +273,7 @@ function Cell({ target, snake, cell }) {
   }, [target]);
 
   return (
-    <div className="xp-box snake-grid-cell"
+    <div className="xp snake-grid-cell"
       style={{
         backgroundColor: skinColor ? skinColor : "black"
       }}
