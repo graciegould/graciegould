@@ -1,12 +1,13 @@
 import Resizable from "../../utils/components/resizable/Resizable";
 import XpButton from "../../utils/components/buttons/XpButton";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { update } from "../../store/reducers/viewportsReducer";
 import { useSelector } from "react-redux";
-import { pixelsToPercentage, percentageToPixels} from "../../utils/elements/units";
+import { pixelsToPercentage, percentageToPixels } from "../../utils/elements/units";
 
 function Viewport({ children, name }) {
+  const viewports = useSelector((state) => state.viewports);
   const viewport = useSelector((state) => state.viewports[name]);
   const dispatch = useDispatch();
   const containerRef = useRef(null);
@@ -43,6 +44,23 @@ function Viewport({ children, name }) {
     dispatch(update({ name, bounds }));
   };
 
+  const handleMouseDown = (e) => {
+    let sortedViewportKeys = Object.keys(viewports).sort((a, b) => viewports[a].zIndex - viewports[b].zIndex);
+    let closestViewport = sortedViewportKeys[sortedViewportKeys.length - 1];
+    if (closestViewport === name) return;
+    let initialZIndex = viewport.zIndex;
+    sortedViewportKeys.forEach((viewportName) => {
+      if (viewportName !== name) {
+        let _zIndex = viewports[viewportName].zIndex;
+        if (_zIndex > initialZIndex) {
+          dispatch(update({ name: viewportName, zIndex: _zIndex - 1 }));
+        }
+      }
+    });
+    dispatch(update({ name, zIndex: Object.keys(viewport).length - 1 }));
+  };
+
+
   return (
     <Resizable
       initialTop={viewport.bounds.top}
@@ -55,9 +73,10 @@ function Viewport({ children, name }) {
       minHeight={viewport.bounds?.minHeight}
       onUpdateSize={(bounds) => dispatch(update({ name, bounds }))}
       ref={containerRef}
-      unit="%"
+      style={{ zIndex: viewport.zIndex }}
       dragHandlerRef={dragHandlerRef}
       className={`viewport-${name}`}
+      onMouseDown={handleMouseDown}
     >
       <div className="xp-box viewport-top-bar">
         <div className="viewport-btn__container">
@@ -75,14 +94,14 @@ function Viewport({ children, name }) {
       </div>
       <div className="viewport-body">
         <Bounds viewport={viewport} />
-      {children}
+        {children}
       </div>
     </Resizable>
   );
 }
 
 
-function Bounds({viewport}) {
+function Bounds({ viewport }) {
   return (
     <div style={{
       position: "absolute",
@@ -91,7 +110,11 @@ function Bounds({viewport}) {
       color: "white",
       fontSize: "12px",
       zIndex: 1000,
+      backgroundColor: "black",
     }}>
+      <div>
+        zIndex: {viewport.zIndex}
+      </div>
       <div>
         WIDTH: {pixelsToPercentage(viewport.bounds.width, "width")}
       </div>
@@ -104,7 +127,7 @@ function Bounds({viewport}) {
       <div>
         LEFT: {pixelsToPercentage(viewport.bounds.left, "left")}
       </div>
-  </div>
+    </div>
   )
 }
 export default Viewport;

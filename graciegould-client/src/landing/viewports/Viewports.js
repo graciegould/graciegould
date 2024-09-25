@@ -6,15 +6,17 @@ import Photos from "./photos/Photos";
 import Webcam from "./webcam/Webcam";
 import Snake from "./snake/Snake";
 import Draw from "./draw/Draw";
+import { useEffect } from "react";
 const componentMap = {
     About,
-    // Draw,
+    Draw,
     Snake,
-    // Photos,
-    // Webcam
+    Photos,
+    Webcam
 };
 function Viewports() {
  const viewports = useSelector(state => state.viewports);
+
   return (
     <div className="viewports">
         {Object.keys(viewports).map((name) => {

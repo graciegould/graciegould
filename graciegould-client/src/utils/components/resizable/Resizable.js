@@ -12,9 +12,13 @@ const Resizable = forwardRef(
       maxHeight = null,
       minWidth = 20,
       minHeight = 20,
+      zIndex = 0,
       onUpdateSize = null,
       dragHandlerRef = null,
       className = null,
+      id = "viewport",
+      style={},
+      ...props
     },
     containerRef
   ) => {
@@ -126,6 +130,7 @@ const Resizable = forwardRef(
       top: top + "px",
       position: "absolute",
       boxSizing: "border-box",
+      ...style
     };
 
     const resizersStyle = {
@@ -153,8 +158,9 @@ const Resizable = forwardRef(
       bottomRight: { right: "-5px", bottom: "-5px", cursor: "nwse-resize" },
     };
 
+    console.log(props)
     return (
-      <div ref={containerRef} className={className ? className : "resizable"} style={resizableStyle}>
+      <div ref={containerRef} className={className ? className : "resizable"} style={resizableStyle} id={id} {...props}>
         <div className="resizers" style={resizersStyle}>
           {children}
           <div
