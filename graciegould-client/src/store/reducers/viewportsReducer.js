@@ -67,7 +67,7 @@ const viewportsSlice = createSlice({
     initialState: {
         "About": {
             name: "About",
-            hidden: false,
+            hidden: true,
             id: "viewport-about",
             iconPath: "/images/landing/icons/about.png",
             zIndex: 4,

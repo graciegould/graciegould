@@ -103,6 +103,7 @@ $color-darkener: rgba(0, 0, 0, 0.5);
 .xp-vertical-scrollbar-thumb {
     @include xp-scrollbar-thumb;
     & {
+    
         height: 100%;
         width: 100%;
         box-sizing: border-box;

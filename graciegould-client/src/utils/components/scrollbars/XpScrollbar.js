@@ -105,7 +105,6 @@ const XpScrollbarVertical = ({
 }) => {
   const scrollContainer = useRef(null);
   return (
-    <div className={className}>
       <div className="xp-scrollable-container-vertical">
         <div
           className="xp-scrollable-vertical-body-overlay"
@@ -114,14 +113,13 @@ const XpScrollbarVertical = ({
           {children}
         </div>
         <div className="xp-scrollbar-vertical-container">
-        <VerticalScrollbar
-          scrollContainer={scrollContainer}
-          verticalThumbColor={verticalThumbColor}
-          verticalScrollbarColor={verticalScrollbarColor}
-        />
+          <VerticalScrollbar
+            scrollContainer={scrollContainer}
+            verticalThumbColor={verticalThumbColor}
+            verticalScrollbarColor={verticalScrollbarColor}
+          />
         </div>
       </div>
-    </div>
   );
 };
 
@@ -139,7 +137,7 @@ const VerticalScrollbar = ({
   useEffect(() => {
     const updateSizes = () => {
       if (!scrollContainer.current || !verticalScrollbarRef.current) return;
-      const containerHeight = scrollContainer.current.clientHeight;
+      const containerHeight = scrollContainer.current.getBoundingClientRect().height;
       const contentHeight = scrollContainer.current.scrollHeight;
       const thumbHeightPercentage = (containerHeight / contentHeight) * 100;
       setVerticalThumbHeight(thumbHeightPercentage);

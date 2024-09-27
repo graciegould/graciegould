@@ -61,13 +61,13 @@ function Viewport({ children, name }) {
     >
       <div className="xp viewport-top-bar">
         <div className="viewport-btn__container">
-          <XpButton onClick={()=> dispatch(exit({ name }))}>X</XpButton>
+          <XpButton onClick={()=> dispatch(exit({ name }))}>x</XpButton>
         </div>
         <div className="viewport-btn__container">
           <XpButton onClick={handleMinimize}>-</XpButton>
         </div>
         <div className="viewport-btn__container">
-          <XpButton onClick={handleMaximize}>[]</XpButton>
+        <XpButton onClick={handleMaximize}>+</XpButton>
         </div>
         <div className="xp viewport-drag-handler" ref={dragHandlerRef}>
           {name}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { show } from "../../store/reducers/viewportsReducer";
 
@@ -8,22 +8,30 @@ function StartMenu() {
     const dispatch = useDispatch();
     const [startMenuOpen, setStartMenuOpen] = useState(false);
     const startMenuWidth = window.screen.width / 5;
+    const startMenuRef = useRef(null);
+    useEffect(() => {
+        document.querySelector('.desktop-center').addEventListener('click', () => {
+            setStartMenuOpen(true);
+        });
+    }, []);
     return (
-        <div className="desktop-start-menu" style={{ width: startMenuWidth + "px" }}>
+        <div className="xp desktop-start-menu" style={{ width: startMenuWidth + "px" }}>
             <div
                 className="xp-btn desktop-start-menu-btn"
                 onClick={() => setStartMenuOpen(!startMenuOpen)}
             >
+                Menu
             </div>
-            <div className="xp desktop-start-menu-contents-container" style={{
-                width: startMenuWidth + "px",
-                height: window.screen.height / 9+ "px",
-                display: startMenuOpen ? "block" : "none"
-            }}>
-                {/* <div className="desktop-start-menu-items-container"> */}
-
-                        {/* {Object.keys(viewports).map((name, index) => {
-                            const viewport = viewports[name];
+            <div className="xp desktop-start-menu-contents-container"
+                ref={startMenuRef}
+                style={{
+                    width: startMenuWidth + "px",
+                    bottom: startMenuOpen ? -startMenuRef.current.offsetHeight - 10 + "px" : "100%",
+                    height: window.screen.height / 4 + "px"
+                }}>
+                <XpScrollbar>
+                    <div className="desktop-start-menu-items-container">
+                        {Object.keys(viewports).map((name, index) => {
                             return (
                                 <div
                                     name={name}
@@ -32,12 +40,17 @@ function StartMenu() {
                                     style={{ height: window.screen.height / 20 + "px" }}
                                     onClick={() => dispatch(show({ name }))}
                                 >
-                                   {name}
+                                    <div className='desktop-start-menu-item-icon'>
+                                        <img src={viewports[name].iconPath} alt={name} />
+                                    </div>
+                                    <div className='desktop-start-menu-item-label'>
+                                        {name}
+                                    </div>
                                 </div>
                             );
-                        })} */}
-
-                {/* </div> */}
+                        })}
+                    </div>
+                </XpScrollbar>
             </div>
         </div>
     )

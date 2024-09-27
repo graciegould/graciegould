@@ -38,6 +38,7 @@ function Snake() {
 function Topbar({ gameData, setGameData }) {
   return (
     <div className="xp snake-topbar">
+      <div className="snake-scores">
       <div className="xp snake-score">
         <div className="snake-score-label">SCORE: {gameData.score}</div>
       </div>
@@ -46,6 +47,8 @@ function Topbar({ gameData, setGameData }) {
           HIGH SCORE: {gameData.highScore}
         </div>
       </div>
+      </div>
+
       <button
         className="xp-btn start-game-button"
         onClick={() =>

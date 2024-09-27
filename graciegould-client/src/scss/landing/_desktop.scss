@@ -1,7 +1,7 @@
 .desktop-container {
-    // position: absolute;
-    width: 100%;
-    height: 100%;
+// position: absolute;
+width: 100%;
+height: 100%;
 }
 
 .desktop-center,
@@ -20,7 +20,7 @@
         width: 100%;
         height: 100%;
         display: grid;
-
+        
         .desktop-icon-container {
             box-sizing: border-box;
             width: 100px;
@@ -49,12 +49,22 @@
 
 .desktop-top-bar {
     top: 0;
+    .desktop-topbar-clock {
+        position: absolute;
+        right: 0;
+        top: 0;
+        font-weight: bold;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+    }
 }
 
 .desktop-bottom-bar {
     bottom: 0px;
     z-index: 100;
     box-sizing: border-box;
+    
 
     .desktop-start-menu {
         position: absolute;
@@ -67,20 +77,58 @@
             text-align: center;
             z-index: 102;
             box-sizing: border-box;
+            justify-content: center;
+            align-items: center;
+            font-size: 200%;
         }
 
         .desktop-start-menu-contents-container {
-            display: none;
             position: absolute;
             width: 100%;
+            height: 100%;
             bottom: 100%;
+            height: 200px;
             box-sizing: border-box;
-            overflow: hidden;
+            
+
+
             .desktop-start-menu-items-container {
                 box-sizing: border-box;
                 width: 100%;
                 height: 100%;
-                border: 5px solid black;
+                padding: 10px;
+                position: absolute;
+                
+            }
+
+            .desktop-start-menu-item {
+                box-sizing: border-box;
+                width: 100%;
+                height: 100px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+            }
+            .desktop-start-menu-item-icon {
+                width: 30%;
+                height: 100%;
+                justify-content: center;
+                align-items: center;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+            }
+            .desktop-start-menu-item-label {
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                width: 100%;
+                font-weight: bold;
+                font-size: 30px;
+                overflow: hidden;
             }
 
             .desktop-start-menu-items {
@@ -90,18 +138,6 @@
                 height: 100%;
                 position: absolute;
                 font-size: 30px;
-                .desktop-start-menu-item {
-                    box-sizing: border-box;
-                    width: 100%;
-                    height: 100px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    cursor: pointer;
-                    &:hover {
-                        // background-color: $light_gray;
-                    }
-                }
             }
         }
     }

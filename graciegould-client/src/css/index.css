@@ -484,13 +484,15 @@ btn {
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 10px;
-  overflow: hidden;
 }
 .about-info-top-right .about-title .about-title-container {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .about-info-bottom-right {
   width: 100%;
@@ -501,6 +503,8 @@ btn {
   overflow: hidden;
   font-size: 20px;
   text-align: justify;
+  align-items: center;
+  justify-content: center;
 }
 .about-info-bottom-right .about-contact-info-item {
   height: 30%;
@@ -520,6 +524,9 @@ btn {
 .about-info-bottom-left .about-description {
   box-sizing: border-box;
   width: 100%;
+}
+.about-info-bottom-left .about-description li {
+  font-size: 25px;
 }
 
 .draw-container {
@@ -672,20 +679,13 @@ btn {
 
 .snake-score,
 .snake-high-score {
+  font-weight: bold;
+  font-size: 1em;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.snake-score-label {
-  font-size: 1em;
-}
-
-.snake-score div,
-.snake-high-score div {
-  font-size: 18px;
-  font-weight: bold;
-  margin-top: 5px;
+  justify-content: center;
+  width: 100%;
 }
 
 .desktop-container {
@@ -736,6 +736,15 @@ btn {
 .desktop-top-bar {
   top: 0;
 }
+.desktop-top-bar .desktop-topbar-clock {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
 
 .desktop-bottom-bar {
   bottom: 0px;
@@ -753,20 +762,53 @@ btn {
   text-align: center;
   z-index: 102;
   box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  font-size: 200%;
 }
 .desktop-bottom-bar .desktop-start-menu .desktop-start-menu-contents-container {
-  display: none;
   position: absolute;
   width: 100%;
+  height: 100%;
   bottom: 100%;
+  height: 200px;
   box-sizing: border-box;
-  overflow: hidden;
 }
 .desktop-bottom-bar .desktop-start-menu .desktop-start-menu-contents-container .desktop-start-menu-items-container {
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  border: 5px solid black;
+  padding: 10px;
+  position: absolute;
+}
+.desktop-bottom-bar .desktop-start-menu .desktop-start-menu-contents-container .desktop-start-menu-item {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.desktop-bottom-bar .desktop-start-menu .desktop-start-menu-contents-container .desktop-start-menu-item-icon {
+  width: 30%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.desktop-bottom-bar .desktop-start-menu .desktop-start-menu-contents-container .desktop-start-menu-item-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.desktop-bottom-bar .desktop-start-menu .desktop-start-menu-contents-container .desktop-start-menu-item-label {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+  font-size: 30px;
+  overflow: hidden;
 }
 .desktop-bottom-bar .desktop-start-menu .desktop-start-menu-contents-container .desktop-start-menu-items {
   box-sizing: border-box;
@@ -776,15 +818,7 @@ btn {
   position: absolute;
   font-size: 30px;
 }
-.desktop-bottom-bar .desktop-start-menu .desktop-start-menu-contents-container .desktop-start-menu-items .desktop-start-menu-item {
-  box-sizing: border-box;
-  width: 100%;
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
+
 @keyframes spin {
   from {
     transform: rotate(0deg);

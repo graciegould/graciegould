@@ -63,20 +63,21 @@
     align-items: center;
 }
 
+
 .snake-score,
 .snake-high-score {
+    font-weight: bold;
+    font-size: 1em;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
-.snake-score-label {
-    font-size: 1em;
-}
+.start-button {
 
+}
 .snake-score div,
 .snake-high-score div {
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 5px;
 }
