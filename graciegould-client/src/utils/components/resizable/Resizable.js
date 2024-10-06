@@ -102,14 +102,13 @@ const Resizable = forwardRef(
               newTop = minTop;
             }
 
-            console.log("max width: ", maxWidth, "new width", newWidth);
             if (maxWidth && newWidth > maxWidth) newWidth = maxWidth;
             if (maxHeight && newHeight > maxHeight) newHeight = maxHeight;
             if (newWidth > minWidth) setWidth(newWidth);
             if (newHeight > minHeight) setHeight(newHeight);
-            
-            setLeft(newLeft); // Set left after checking minLeft
-            setTop(newTop);   // Set top after checking minTop
+
+            setLeft(newLeft); 
+            setTop(newTop); 
           }
           function stopResize() {
             window.removeEventListener("mousemove", resize);

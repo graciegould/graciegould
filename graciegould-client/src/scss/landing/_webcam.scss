@@ -1,30 +1,53 @@
 .webcam-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 5% 80% 15%;
+  grid-auto-columns: 100%;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "webcam-top-bar-container"
+    "webcam-video-container"
+    "webcam-bottom-bar-container";
+  box-sizing: border-box;
+}
+
+.webcam-video-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  grid-area: webcam-video-container;
+  // background-color: black;
+
+  .webcam-canvas-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+
+    canvas {
+      width: auto;
+      height: 100%;
+      background-color: white;
+    }
+  }
+
+
+  .webcam-menu {
     position: absolute;
     width: 100%;
     height: 100%;
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: 5% 80% 25%;
-    grid-auto-columns: 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-        "webcam-top-bar-container"
-        "webcam-video-container"
-        "webcam-bottom-bar-container";
-}
-
-.webcam-video-container {
-
-    grid-area: webcam-video-container;
-}
-.webcam-video-container {
-  flex-grow: 1;
-  background-color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 5px;
+    bottom: 0;
+    left: 0;
+    background-color: rgb(0, 0, 0, 0);
+    overflow: hidden;
+  }
 }
 
 .webcam-video {
@@ -33,39 +56,59 @@
 }
 
 .webcam-top-bar-container {
-    background-color: $xp_blue;
-    grid-area: webcam-top-bar-container;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: $xp_blue;
+  grid-area: webcam-top-bar-container;
 }
 
 .webcam-bottom-bar-container {
+  grid-area: webcam-bottom-bar-container;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  // border: 5px solid red;
+  box-sizing: border-box;
+  grid-template-columns: 100%; 
+  grid-template-rows:20% 80%; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "webcam-bottom-bar-top"
+    "webcam-thumbnail-container"; 
 
-    grid-area: webcam-bottom-bar-container;
+  .webcam-bottom-bar-top {
+    @include center;
+    grid-area: webcam-bottom-bar-top;
+    position: absolute;
+    width: 100%;
+    height: 20%;
+    box-sizing: border-box;
+    border: 2px solid green;
+
+    .webcam-camera-button {}
+  }
+
+  .webcam-thumbnail-container {
+    grid-area: webcam-thumbnail-container;
+    background-color: aqua;
+    border: 2px solid #ffc0cb;
+
+    .webcam-thumbnail-item {
+      // position: absolute;
+      // border: 1px solid black;
+      // flex: 0 0 10%;
+      // height: 100%;
+      // display: flex;
+      // justify-content: center;
+      // align-items: center;
+      // overflow: hidden;
+
+      .webcam-thumbnail {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+    }
+  }
 }
-
-
-
-
-// .webcam-container {
-//   display: flex;
-//   flex-direction: column;
-//   border: 2px solid $xp_dark_gray;
-// }
-
-// .webcam-header {
-//   background-color: $xp_blue;
-//   color: white;
-//   padding: 5px;
-//   font-size: 14px;
-// }
-
-
-
-// .webcam-footer {
-//   display: flex;
-//   justify-content: space-between;
-//   padding: 5px;
-// }
-
-// .resize-slider {
-//   width: 100px;
-// }

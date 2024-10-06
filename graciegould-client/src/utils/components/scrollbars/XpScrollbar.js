@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 const XpScrollbar = ({
   children,
   vertical = true,
@@ -11,15 +11,12 @@ const XpScrollbar = ({
 
 
   if (vertical && horizontal) {
-    console.log("vertical and horizontal", className);
     ScrollbarComponent = XpScrollbarVerticalAndHorizontal;
   }
   else if (vertical) {
-    console.log("vertical", className);
     ScrollbarComponent = XpScrollbarVertical;
   }
   else if (horizontal) {
-    console.log("horizontal", className);
     ScrollbarComponent = XpScrollbarHorizontal;
   }
 
@@ -105,21 +102,21 @@ const XpScrollbarVertical = ({
 }) => {
   const scrollContainer = useRef(null);
   return (
-      <div className="xp-scrollable-container-vertical">
-        <div
-          className="xp-scrollable-vertical-body-overlay"
-          ref={scrollContainer}
-        >
-          {children}
-        </div>
-        <div className="xp-scrollbar-vertical-container">
-          <VerticalScrollbar
-            scrollContainer={scrollContainer}
-            verticalThumbColor={verticalThumbColor}
-            verticalScrollbarColor={verticalScrollbarColor}
-          />
-        </div>
+    <div className="xp-scrollable-container-vertical">
+      <div
+        className="xp-scrollable-vertical-body-overlay"
+        ref={scrollContainer}
+      >
+        {children}
       </div>
+      <div className="xp-scrollbar-vertical-container">
+        <VerticalScrollbar
+          scrollContainer={scrollContainer}
+          verticalThumbColor={verticalThumbColor}
+          verticalScrollbarColor={verticalScrollbarColor}
+        />
+      </div>
+    </div>
   );
 };
 

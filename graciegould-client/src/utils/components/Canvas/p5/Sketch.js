@@ -2,11 +2,11 @@ import React, { forwardRef, useEffect, useRef } from "react";
 import p5 from "p5";
 
 const Sketch = forwardRef(({ 
-    width, 
-    height, 
     className ="canvas",
     noLoop = true,
     setup = null,
+    width = 500,
+    height = 500,   
     ...props 
     }, p5Ref) => {
     const canvasRef = useRef(null);
@@ -38,9 +38,9 @@ const Sketch = forwardRef(({
 
         }; 
         p5Ref.current = new p5(Sketch, canvasRef.current);
-    }, [width, height]);
+    }, []);
 
-    return <div className={className} ref={canvasRef} width={width} height={height} {...props} />;
+    return <div className={className} ref={canvasRef} width={width}  height={height} {...props} />;
 });
 
 export default Sketch;

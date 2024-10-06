@@ -1,5 +1,4 @@
 import Desktop from "./desktop/Desktop";
-
 function Landing() {
   return (
     <div className="landing__container">

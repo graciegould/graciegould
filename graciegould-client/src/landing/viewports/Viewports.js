@@ -4,14 +4,12 @@ import About from "./about/About";
 import Photos from "./photos/Photos";
 import Webcam from "./webcam/Webcam";
 import Snake from "./snake/Snake";
-import Draw from "./draw/Draw";
 import { useEffect, useRef, useState } from "react";
 const componentMap = {
     About,
-    Draw,
     Snake,
     Photos,
-    Webcam
+    // Webcam
 };
 
 function Viewports() {

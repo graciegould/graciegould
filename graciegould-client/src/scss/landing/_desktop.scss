@@ -1,7 +1,7 @@
 .desktop-container {
-// position: absolute;
-width: 100%;
-height: 100%;
+    // position: absolute;
+    width: 100%;
+    height: 100%;
 }
 
 .desktop-center,
@@ -15,22 +15,25 @@ height: 100%;
     width: 100%;
     position: absolute;
     box-sizing: border-box;
+
     .desktop-icons {
         box-sizing: border-box;
         width: 100%;
         height: 100%;
         display: grid;
-        
+
         .desktop-icon-container {
             box-sizing: border-box;
             width: 100px;
             height: 100px;
             cursor: pointer;
+
             img {
                 width: 100%;
                 height: 100%;
                 object-fit: contain;
             }
+
             .desktop-icon-label {
                 width: 100%;
                 display: flex;
@@ -39,16 +42,16 @@ height: 100%;
                 font-weight: bold;
             }
         }
+
         .desktop-icon-container img:hover {
-          animation: spin 1s linear infinite;
+            animation: spin 1s linear infinite;
         }
-    
-    
     }
 }
 
 .desktop-top-bar {
     top: 0;
+
     .desktop-topbar-clock {
         position: absolute;
         right: 0;
@@ -60,17 +63,30 @@ height: 100%;
     }
 }
 
+.desktop-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    .desktop-background-canvas {
+        width: 100%;
+        height: 100%;
+        background-color: aqua;
+    }
+}
+
 .desktop-bottom-bar {
     bottom: 0px;
-    z-index: 100;
     box-sizing: border-box;
-    
+    display: flex;
+
 
     .desktop-start-menu {
         position: absolute;
-        width: 100%;
         height: 100%;
-
+        left: 0;
         .desktop-start-menu-btn {
             height: 100%;
             display: flex;
@@ -89,7 +105,7 @@ height: 100%;
             bottom: 100%;
             height: 200px;
             box-sizing: border-box;
-            
+
 
 
             .desktop-start-menu-items-container {
@@ -98,7 +114,7 @@ height: 100%;
                 height: 100%;
                 padding: 10px;
                 position: absolute;
-                
+
             }
 
             .desktop-start-menu-item {
@@ -110,17 +126,20 @@ height: 100%;
                 align-items: center;
                 cursor: pointer;
             }
+
             .desktop-start-menu-item-icon {
                 width: 30%;
                 height: 100%;
                 justify-content: center;
                 align-items: center;
+
                 img {
                     width: 100%;
                     height: 100%;
                     object-fit: contain;
                 }
             }
+
             .desktop-start-menu-item-label {
                 justify-content: center;
                 align-items: center;
@@ -141,6 +160,46 @@ height: 100%;
             }
         }
     }
+
+    .desktop-dashboard {
+        position: absolute;
+        display: flex;
+        box-sizing: border-box;
+        .desktop-dashboard-minimized-item {
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            overflow-y: hidden;
+            overflow-x: scroll;
+        }
+
+        .desktop-dashboard-minimized-item-icon {
+            width: 30%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+
+        .desktop-dashboard-minimized-item-label {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+            font-weight: bold;
+            font-size: 30px;
+            overflow: hidden;
+        }
+    }
 }
 
 
@@ -148,6 +207,7 @@ height: 100%;
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }

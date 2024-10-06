@@ -1,7 +1,7 @@
 import Resizable from "../../utils/components/resizable/Resizable";
 import XpButton from "../../utils/components/buttons/XpButton";
 import React, { useEffect, useRef } from "react";
-import {update, bringToFront, exit} from "../../store/reducers/viewportsReducer";
+import {update, bringToFront, exit, minimize} from "../../store/reducers/viewportsReducer";
 import { useSelector, useDispatch } from "react-redux";
 import { pixelsToPercentage, percentageToPixels } from "../../utils/elements/units";
 
@@ -11,21 +11,6 @@ function Viewport({ children, name }) {
   const dispatch = useDispatch();
   const containerRef = useRef(null);
   const dragHandlerRef = useRef(null);
-
-
-  const handleMinimize = () => {
-    console.log(viewports)
-    const bounds = {
-      top: 100,
-      left: 100,
-      width: 350,
-      height: 200,
-    };
-    Object.keys(bounds).forEach((key) => {
-      containerRef.current.style[key] = bounds[key] + "px";
-    });
-    dispatch(update({ name, bounds }));
-  };
 
   const handleMaximize = () => {
     const bounds = {
@@ -47,10 +32,10 @@ function Viewport({ children, name }) {
       initialLeft={viewport.bounds.left}
       initialWidth={viewport.bounds.width}
       initialHeight={viewport.bounds.height}
-      maxWidth={viewport.bounds?.maxWidth}
-      maxHeight={viewport.bounds?.maxHeight}
-      minWidth={viewport.bounds?.minWidth}
-      minHeight={viewport.bounds?.minHeight}
+      maxWidth={viewport?.maxWidth}
+      maxHeight={viewport?.maxHeight}
+      minWidth={viewport?.minWidth}
+      minHeight={viewport?.minHeight}
       minTop={window.screen.height / 30}
       onUpdateSize={(bounds) => dispatch(update({ name, bounds }))}
       ref={containerRef}
@@ -64,7 +49,7 @@ function Viewport({ children, name }) {
           <XpButton onClick={()=> dispatch(exit({ name }))}>x</XpButton>
         </div>
         <div className="viewport-btn__container">
-          <XpButton onClick={handleMinimize}>-</XpButton>
+          <XpButton onClick={() => dispatch(minimize({ name }))}>-</XpButton>
         </div>
         <div className="viewport-btn__container">
         <XpButton onClick={handleMaximize}>+</XpButton>
@@ -74,7 +59,7 @@ function Viewport({ children, name }) {
         </div>
       </div>
       <div className="viewport-body">
-        <Bounds viewport={viewport} />
+        {/* <Bounds viewport={viewport} /> */}
         {children}
       </div>
     </Resizable>

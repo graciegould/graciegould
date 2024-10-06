@@ -21,9 +21,9 @@ return (
             <h2>Greetings,</h2>
             <h3>ABOUT ME</h3>
             <ul>
-                <li>Multifaceted gal, who loves to craft code.</li>
+                <li>Multifaceted gal, who loves the craft of web development.</li>
                 <li>
-                    Although I love the fun creative stuff -- I devote equal care to
+                    Creative on the frontend & devote equal care to
                     backend.
                 </li>
             </ul>

@@ -248,3 +248,32 @@ $color-darkener: rgba(0, 0, 0, 0.5);
     
     }
 }
+
+
+.xp-menu-container {
+    position: absolute;
+    width: 100%;
+    height: 0px;
+    bottom: 0px;
+    // border: 2px outset cyan;
+    .xp-menu-btn {
+        @include center;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        bottom: 0px;
+    }
+    .xp-menu-items-container {
+        @include xp;
+        position: absolute;
+        width: 100%;
+        
+        .xp-menu-items {
+            display: flex;
+            flex-direction: column;
+        }
+        .xp-menu-item {
+            @include center;
+        }
+    }
+}

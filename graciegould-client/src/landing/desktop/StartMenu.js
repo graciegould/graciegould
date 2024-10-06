@@ -3,11 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { show } from "../../store/reducers/viewportsReducer";
 
 import XpScrollbar from '../../utils/components/scrollbars/XpScrollbar';
-function StartMenu() {
+function StartMenu({startMenuWidth, bottomBarHeight}) {
     const viewports = useSelector((state) => state.viewports);
     const dispatch = useDispatch();
     const [startMenuOpen, setStartMenuOpen] = useState(false);
-    const startMenuWidth = window.screen.width / 5;
     const startMenuRef = useRef(null);
     useEffect(() => {
         document.querySelector('.desktop-center').addEventListener('click', () => {
@@ -37,7 +36,7 @@ function StartMenu() {
                                     name={name}
                                     key={"start-menu-viewport-" + index}
                                     className="xp-btn desktop-start-menu-item"
-                                    style={{ height: window.screen.height / 20 + "px" }}
+                                    style={{ height: bottomBarHeight + "px" }}
                                     onClick={() => dispatch(show({ name }))}
                                 >
                                     <div className='desktop-start-menu-item-icon'>
